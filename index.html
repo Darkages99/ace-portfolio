@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <!-- Mark JS-on before paint so reveal animations apply only with JS; without
+         JS (or if it fails) all content stays visible. -->
+    <script>document.documentElement.classList.add('js')</script>
+
+    <!-- ===================== Primary SEO ===================== -->
+    <title>Ancient Combat Evolution: MMA, Boxing &amp; Muay Thai Gym in Alwarpet, Chennai</title>
+    <meta
+      name="description"
+      content="Train MMA, Boxing, Muay Thai and Brazilian Jiu-Jitsu at Ancient Combat Evolution, Alwarpet, Chennai's underground combat-sports arena. Coached by competitors, open to all ages. Book your first class."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Ancient Combat Evolution" />
+    <!-- PLACEHOLDER domain, swap to the real canonical before launch -->
+    <link rel="canonical" href="https://ancientcombatevolution.in/" />
+
+    <link rel="icon" type="image/png" sizes="any" href="./assets/favicon.png" />
+    <link rel="apple-touch-icon" href="./assets/favicon.png" />
+
+    <!-- ===================== Open Graph / Twitter ===================== -->
+    <meta property="og:type" content="business.business" />
+    <meta property="og:site_name" content="Ancient Combat Evolution" />
+    <meta property="og:title" content="Ancient Combat Evolution: MMA &amp; Boxing in Alwarpet, Chennai" />
+    <meta property="og:description" content="Alwarpet's underground combat-sports arena. MMA, Boxing, Muay Thai &amp; BJJ, coached by competitors, open to all. Book your first class." />
+    <meta property="og:image" content="./assets/proof-group.webp" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:url" content="https://ancientcombatevolution.in/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ancient Combat Evolution: MMA &amp; Boxing, Alwarpet" />
+    <meta name="twitter:description" content="Alwarpet's underground combat-sports arena. Book your first class." />
+    <meta name="twitter:image" content="./assets/proof-group.webp" />
+
+    <!-- ===================== Performance hints ===================== -->
+    <!-- The hero video poster is the only above-the-fold image fetch (the loop
+         itself is lazy-swapped after idle). The display font is hashed by the
+         bundler and loads with font-display:swap, so the headline paints
+         instantly in the fallback and swaps in Anton. -->
+    <link rel="preload" as="image" href="./assets/hero-spar.webp" fetchpriority="high" />
+
+    <!-- ===================== Structured data ===================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["SportsActivityLocation", "HealthClub"],
+        "@id": "https://ancientcombatevolution.in/#gym",
+        "name": "Ancient Combat Evolution",
+        "alternateName": "ACE Combat",
+        "description": "Combat-sports gym in Alwarpet, Chennai offering MMA, Boxing, Muay Thai, Brazilian Jiu-Jitsu and strength & conditioning for all ages and levels.",
+        "url": "https://ancientcombatevolution.in/",
+        "image": "https://ancientcombatevolution.in/assets/proof-group.webp",
+        "logo": "https://ancientcombatevolution.in/assets/logo.webp",
+        "sport": ["Mixed Martial Arts", "Boxing", "Muay Thai", "Brazilian Jiu-Jitsu"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "2, Ashoka Street, Sri Ram Colony, Abiramapuram, Alwarpet",
+          "addressLocality": "Chennai",
+          "addressRegion": "Tamil Nadu",
+          "postalCode": "600018",
+          "addressCountry": "IN"
+        },
+        "areaServed": ["Alwarpet", "Abiramapuram", "Mylapore", "T. Nagar", "Teynampet", "Chennai"],
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:00", "closes": "09:30" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "17:30", "closes": "21:00" }
+        ],
+        "sameAs": ["https://www.instagram.com/ancient_combat_evolution/"],
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "12", "bestRating": "5" },
+        "priceRange": "₹₹"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Where is Ancient Combat Evolution located?", "acceptedAnswer": { "@type": "Answer", "text": "We're in Abiramapuram, Alwarpet, Chennai 600018, minutes from Mylapore and T. Nagar. Open seven days a week, mornings 6:00–9:30 AM and evenings 5:30–9:00 PM." } },
+          { "@type": "Question", "name": "Do I need any experience to start?", "acceptedAnswer": { "@type": "Answer", "text": "No. Our classes are open to all ages and levels. Coaches scale every session, so complete beginners train safely alongside competitors." } },
+          { "@type": "Question", "name": "Which combat sports can I train?", "acceptedAnswer": { "@type": "Answer", "text": "Boxing, Muay Thai, Brazilian Jiu-Jitsu, full MMA, and strength & conditioning built for fighters." } },
+          { "@type": "Question", "name": "How do I book my first class?", "acceptedAnswer": { "@type": "Answer", "text": "Use the booking form on this page or message us on WhatsApp. We'll confirm a time and tell you exactly what to bring." } }
+        ]
+      }
+    </script>
+
+    <script type="module" src="/src/main.js"></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#book">Skip to booking</a>
+
+    <!-- ============================ NAV ============================ -->
+    <header class="nav" id="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" href="#home" aria-label="Ancient Combat Evolution, home">
+          <img src="./assets/logo.webp" alt="" width="40" height="40" class="nav__logo" />
+          <span class="nav__brandtext">Ancient Combat<strong> Evolution</strong></span>
+        </a>
+
+        <nav class="nav__links" id="navlinks" aria-label="Primary">
+          <a href="#programs">Disciplines</a>
+          <a href="#vault">The Vault</a>
+          <a href="#proof">Proof</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#location">Find Us</a>
+        </nav>
+
+        <a href="#book" class="btn btn--gold nav__cta js-book">Book a Class</a>
+
+        <button class="nav__toggle" id="navtoggle" aria-expanded="false" aria-controls="navlinks" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============================ HERO ============================ -->
+      <!-- Split layout: headline over the ambient ember field (left), clean
+           training loop (right). The boxer cutout + scrim are gone, text now
+           sits directly on the dark ember theme for maximum contrast. -->
+      <section class="hero" id="home">
+        <div class="hero__void" aria-hidden="true"></div>
+
+        <div class="hero__inner">
+          <div class="hero__text">
+            <h1 class="hero__title">
+              <span>Ancient</span>
+              <span>Combat</span>
+              <span class="g">Evolution</span>
+            </h1>
+            <p class="hero__over">
+              <span>MMA · Boxing · Muay Thai · BJJ</span>
+              <span class="hero__over-loc">Alwarpet, Chennai</span>
+            </p>
+            <div class="hero__cta">
+              <a href="#book" class="btn btn--gold btn--lg js-book">Book Your First Class</a>
+              <a href="#vault" class="btn btn--ghost btn--lg">Enter the Arena</a>
+            </div>
+          </div>
+
+          <!-- Right: clean cinematic training loop. Poster paints first (LCP-safe);
+               initReels() swaps in a muted, seamless, looping <video> after idle. -->
+          <figure class="hero__media reel" data-video="./assets/hero-spar.mp4">
+            <img class="reel__poster" src="./assets/hero-spar.webp" alt="Sparring round on the mats at Ancient Combat Evolution, Alwarpet" width="720" height="1280" fetchpriority="high" decoding="async" />
+          </figure>
+        </div>
+        <a class="hero__scroll" href="#programs" aria-label="Scroll to disciplines">↓</a>
+      </section>
+
+      <!-- ============================ STATS BAND ============================ -->
+      <section class="stats-band" aria-label="By the numbers">
+        <ul class="stats reveal wrap">
+          <li><span class="stats__n">5.0★</span><span class="stats__l">Member rating</span></li>
+          <li><span class="stats__n">4</span><span class="stats__l">Combat disciplines</span></li>
+          <li><span class="stats__n">7</span><span class="stats__l">Days a week</span></li>
+          <li><span class="stats__n">All</span><span class="stats__l">Ages &amp; levels</span></li>
+        </ul>
+      </section>
+
+      <!-- ============================ PROGRAMS ============================ -->
+      <section class="section programs" id="programs">
+        <div class="wrap">
+          <header class="section__head reveal">
+            <p class="eyebrow">The Disciplines</p>
+            <h2 class="section__title">Four arts.<br /><span class="g">One standard.</span></h2>
+            <p class="section__lead">
+              No watered-down fitness classes. Every discipline is taught properly: technical,
+              demanding, and built to hold up when it counts.
+            </p>
+          </header>
+
+          <div class="prog-grid">
+            <article class="prog reveal">
+              <span class="prog__num">01</span>
+              <h3 class="prog__title">Boxing</h3>
+              <p class="prog__blurb">For beginners and busy professionals who want to get fit, learn to actually box, and build real confidence. No experience needed.</p>
+            </article>
+            <article class="prog reveal">
+              <span class="prog__num">02</span>
+              <h3 class="prog__title">Muay&nbsp;Thai</h3>
+              <p class="prog__blurb">For anyone who wants a serious striking workout and the discipline of stand-up fighting, whatever your starting point.</p>
+            </article>
+            <article class="prog reveal">
+              <span class="prog__num">03</span>
+              <h3 class="prog__title">Brazilian Jiu-Jitsu</h3>
+              <p class="prog__blurb">For people who want practical self-defense and a smarter way to train, where leverage and technique beat size and strength.</p>
+            </article>
+            <article class="prog reveal">
+              <span class="prog__num">04</span>
+              <h3 class="prog__title">Strength &amp; Conditioning</h3>
+              <p class="prog__blurb">For members who want a fighter's engine: the power, stamina and durability that carry into sport and everyday life.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ THE VAULT ============================ -->
+      <section class="section vault" id="vault">
+        <div class="wrap">
+          <header class="section__head reveal">
+            <p class="eyebrow">The Vault</p>
+            <h2 class="section__title">Real rounds. <span class="g">Real work.</span></h2>
+            <p class="section__lead">No stock footage. This is the actual floor, bags swinging, mitts cracking, the room moving as one.</p>
+          </header>
+
+          <div class="vault-grid">
+            <figure class="reel reveal" data-video="./assets/hero-spar.mp4" data-word="STRIKING">
+              <img class="reel__poster" src="./assets/hero-spar.webp" alt="Two boxers trading combinations on the mats at Ancient Combat Evolution, Alwarpet" width="720" height="1280" loading="lazy" decoding="async" />
+              <span class="reel__word">Striking</span>
+              <figcaption class="reel__cap">Pad &amp; sparring work, live combinations under a coach's eye.</figcaption>
+            </figure>
+
+            <figure class="reel reveal" data-video="./assets/bag-power.mp4" data-word="POWER">
+              <img class="reel__poster" src="./assets/bag-power.webp" alt="Heavy-bag striking session at Ancient Combat Evolution" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="reel__word">Power</span>
+              <figcaption class="reel__cap">Heavy-bag rounds, building power that lands.</figcaption>
+            </figure>
+
+            <figure class="reel reveal" data-video="./assets/group-class.mp4" data-word="DISCIPLINE">
+              <img class="reel__poster" src="./assets/group-class.webp" alt="Group class shadowboxing in formation at Ancient Combat Evolution" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="reel__word">Discipline</span>
+              <figcaption class="reel__cap">Group class, footwork and form drilled in formation.</figcaption>
+            </figure>
+
+            <figure class="reel reveal" data-video="./assets/conditioning.mp4" data-word="CONSISTENCY">
+              <img class="reel__poster" src="./assets/conditioning.webp" alt="Conditioning drills in front of the ACE mural" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="reel__word">Consistency</span>
+              <figcaption class="reel__cap">Conditioning, the unglamorous work that wins fights.</figcaption>
+            </figure>
+
+            <figure class="reel reveal" data-video="./assets/skip.mp4" data-word="EVOLUTION">
+              <img class="reel__poster" src="./assets/skip.webp" alt="Athlete skipping rope to build footwork and endurance" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="reel__word">Evolution</span>
+              <figcaption class="reel__cap">Rope &amp; footwork, the foundation under everything.</figcaption>
+            </figure>
+
+            <figure class="reel reveal" data-video="./assets/boxing.mp4" data-word="TECHNIQUE">
+              <img class="reel__poster" src="./assets/boxing.webp" alt="Boxing combinations drilled with a partner" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="reel__word">Technique</span>
+              <figcaption class="reel__cap">Partner drills, sharpening timing and distance.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ PROOF ============================ -->
+      <section class="section proof" id="proof">
+        <div class="wrap">
+          <header class="section__head reveal">
+            <p class="eyebrow">Proven</p>
+            <h2 class="section__title">Medals on the wall.<br /><span class="g">Names in the books.</span></h2>
+            <p class="section__lead">Our members don't just train, they compete, and they win. State-championship medals and a room full of people who keep coming back.</p>
+          </header>
+
+          <div class="proof-grid">
+            <figure class="proof__media proof__media--wide reveal">
+              <img src="./assets/proof-medals.webp" alt="Ancient Combat Evolution members holding state-championship medals" width="1080" height="1440" loading="lazy" decoding="async" />
+              <figcaption>State-championship medalists, Team ACE.</figcaption>
+            </figure>
+
+            <figure class="reel reveal" data-video="./assets/proof-trophy.mp4" data-word="">
+              <img class="reel__poster" src="./assets/proof-trophy.webp" alt="Trophies and medals won by Ancient Combat Evolution members" width="540" height="960" loading="lazy" decoding="async" />
+              <figcaption class="reel__cap">Hardware earned on the mats.</figcaption>
+            </figure>
+
+            <figure class="reel reveal" data-video="./assets/ceremony.mp4" data-word="">
+              <img class="reel__poster" src="./assets/ceremony.webp" alt="Award ceremony at Ancient Combat Evolution" width="540" height="960" loading="lazy" decoding="async" />
+              <figcaption class="reel__cap">Recognising the grind, awards night.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ REVIEWS ============================ -->
+      <section class="reviews-section" id="reviews" aria-label="Member reviews">
+        <div class="wrap">
+          <header class="section__head reveal">
+            <p class="eyebrow">Reviews</p>
+            <h2 class="section__title">Loved in <span class="g">Alwarpet.</span></h2>
+            <p class="section__lead">Real words from members, straight off our Google reviews.</p>
+          </header>
+        </div>
+        <!-- continuous marquee: set A + an aria-hidden clone so translateX(-50%) loops seamlessly -->
+        <div class="reviews" aria-label="What members say">
+          <div class="reviews__track">
+            <blockquote class="review">
+              <p>"The boxing training here completely transformed my fitness. The coaches are friendly, motivating, and truly know their craft."</p>
+              <cite>Google review</cite>
+            </blockquote>
+            <blockquote class="review">
+              <p>"Top-notch facilities in a convenient Alwarpet location. I came for fitness and stayed for the community."</p>
+              <cite>Google review</cite>
+            </blockquote>
+            <blockquote class="review">
+              <p>"ACE has had a massive positive impact on both my mental and physical well-being. More than a gym, a transformation space."</p>
+              <cite>Google review</cite>
+            </blockquote>
+            <blockquote class="review" aria-hidden="true">
+              <p>"The boxing training here completely transformed my fitness. The coaches are friendly, motivating, and truly know their craft."</p>
+              <cite>Google review</cite>
+            </blockquote>
+            <blockquote class="review" aria-hidden="true">
+              <p>"Top-notch facilities in a convenient Alwarpet location. I came for fitness and stayed for the community."</p>
+              <cite>Google review</cite>
+            </blockquote>
+            <blockquote class="review" aria-hidden="true">
+              <p>"ACE has had a massive positive impact on both my mental and physical well-being. More than a gym, a transformation space."</p>
+              <cite>Google review</cite>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ SCHEDULE ============================ -->
+      <section class="section schedule" id="schedule">
+        <div class="wrap">
+          <header class="section__head reveal">
+            <p class="eyebrow">Schedule</p>
+            <h2 class="section__title">Train morning <span class="g">or night.</span></h2>
+            <p class="section__lead">Open seven days a week. Two windows daily, pick the one that fits your life and show up.</p>
+          </header>
+
+          <div class="sched-grid">
+            <article class="sched reveal">
+              <p class="sched__period">Morning</p>
+              <p class="sched__time">6:00 – 9:30 AM</p>
+              <p class="sched__focus">Boxing &amp; Fitness</p>
+            </article>
+            <article class="sched sched--gold reveal">
+              <p class="sched__period">Evening</p>
+              <p class="sched__time">5:30 – 9:00 PM</p>
+              <p class="sched__focus">MMA, BJJ &amp; Muay Thai</p>
+            </article>
+            <article class="sched sched--cta reveal">
+              <p class="sched__period">Not sure where to start?</p>
+              <p class="sched__focus">Book a trial and we'll slot you into the right session.</p>
+              <a href="#book" class="btn btn--gold js-book">Book a Trial</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ FIND US ============================ -->
+      <section class="section location" id="location">
+        <div class="wrap location__grid">
+          <div class="location__info reveal">
+            <p class="eyebrow">Find Us</p>
+            <h2 class="section__title">In the heart of <span class="g">Alwarpet.</span></h2>
+            <address class="location__addr">
+              2, Ashoka Street, Sri Ram Colony,<br />
+              Abiramapuram, Alwarpet,<br />
+              Chennai 600018
+            </address>
+            <dl class="location__meta">
+              <div><dt>Hours</dt><dd>Mon–Sun · 6:00–9:30 AM &amp; 5:30–9:00 PM</dd></div>
+              <div><dt>Phone</dt><dd><a class="js-tel" href="#">Call the gym</a></dd></div>
+              <div><dt>Instagram</dt><dd><a class="js-instagram" href="#" target="_blank" rel="noopener">@ancient_combat_evolution</a></dd></div>
+            </dl>
+            <div class="location__cta">
+              <a class="btn btn--gold js-book" href="#book">Book a Class</a>
+              <a class="btn btn--ghost js-directions" href="#" target="_blank" rel="noopener">Get Directions</a>
+            </div>
+          </div>
+          <div class="location__map reveal" data-map>
+            <!-- Map iframe lazy-injected by JS (Phase 3) to keep it off the critical path -->
+            <div class="location__map-ph" aria-hidden="true">Map loads on scroll</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ FINISHER / BOOK ============================ -->
+      <section class="section book" id="book">
+        <div class="wrap book__grid">
+          <div class="book__copy reveal">
+            <p class="eyebrow">Your First Round</p>
+            <h2 class="section__title">Step into <span class="g">the arena.</span></h2>
+            <p class="section__lead">
+              Leave your details and we'll lock in your first class, no pressure, no contracts.
+              Prefer to talk? Message us on WhatsApp and a coach will reply.
+            </p>
+            <a class="btn btn--whatsapp btn--lg js-whatsapp" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.737-.981a9.86 9.86 0 002.741.274z"/></svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+
+          <form class="book__form reveal" id="bookform" novalidate>
+            <div class="field">
+              <label for="f-name">Name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="f-phone">Phone / WhatsApp</label>
+              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+91…" />
+            </div>
+            <div class="field">
+              <label for="f-goal">What do you want to train?</label>
+              <select id="f-goal" name="goal">
+                <option value="Not sure yet">Not sure yet, recommend for me</option>
+                <option value="Boxing">Boxing</option>
+                <option value="Muay Thai">Muay Thai</option>
+                <option value="Brazilian Jiu-Jitsu">Brazilian Jiu-Jitsu</option>
+                <option value="MMA">MMA</option>
+                <option value="Strength & Conditioning">Strength &amp; Conditioning</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-time">Preferred time</label>
+              <select id="f-time" name="time">
+                <option value="Morning">Morning (6:00–9:30 AM)</option>
+                <option value="Evening">Evening (5:30–9:00 PM)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn--gold btn--lg book__submit">Claim My First Class</button>
+            <p class="book__note" id="formnote" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="footer">
+      <div class="wrap footer__grid">
+        <div class="footer__brand">
+          <img src="./assets/logo.webp" alt="Ancient Combat Evolution" width="56" height="56" />
+          <p>Alwarpet's underground combat-sports arena. Discipline in. Evolution out.</p>
+        </div>
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="#programs">Disciplines</a>
+          <a href="#vault">The Vault</a>
+          <a href="#proof">Proof</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#location">Find Us</a>
+          <a href="#book">Book</a>
+        </nav>
+        <div class="footer__contact">
+          <a class="js-instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+          <a class="js-tel" href="#">Call</a>
+          <a class="js-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <div class="wrap footer__base">
+        <p>© <span id="year">2026</span> Ancient Combat Evolution · Alwarpet, Chennai</p>
+        <p class="footer__credit">Crafted by <a class="js-agency" href="../../">Brand-Alchemy</a></p>
+      </div>
+    </footer>
+
+    <!-- ============================ WHATSAPP FAB ============================ -->
+    <a class="fab js-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.737-.981a9.86 9.86 0 002.741.274z"/></svg>
+    </a>
+  </body>
+</html>

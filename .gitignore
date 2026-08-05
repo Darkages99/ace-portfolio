@@ -1,0 +1,25 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vite
+.DS_Store
+npm-debug.log*
+
+# verification artifacts (screenshots + preview logs)
+verify-shots/*.png
+preview*.log
+
+# media pipeline scratch (contact sheets, bg-removal intermediates).
+# Final web assets live in public/assets/ (committed) and are reproducible via `npm run media`.
+/media/
+
+# stray local test artifacts (not part of the site)
+test_hero.py
+hero_screenshot.png
+
+# raw source footage — the site ships processed assets in public/assets/ instead
+assets/*.mp4
+
+# generated marketing/brag video output, not part of the site
+brag-output/

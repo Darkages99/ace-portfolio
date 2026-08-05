@@ -1,0 +1,41 @@
+// ---------------------------------------------------------------------------
+//  ACE — runtime config (links, contact, endpoints).
+//
+//  Visible COPY lives in index.html (static = best for SEO + no-JS + perf).
+//  This module holds only the values JS needs to wire up interactivity:
+//  phone, WhatsApp, booking, form endpoint, map, socials.
+//
+//  ⚠️  PLACEHOLDERS — swap before launch (see README "Before launch").
+//      Anything marked PLACEHOLDER is intentionally inert.
+// ---------------------------------------------------------------------------
+
+// PLACEHOLDER — gym's real phone. Powers tel:, WhatsApp, and schema.
+export const PHONE_DISPLAY = '+91 00000 00000'
+export const PHONE_E164 = '910000000000'
+
+// PLACEHOLDER — booking link (e.g. Calendly). null → the "Book" CTAs scroll to
+// the on-page form instead of opening an external scheduler.
+export const BOOKING_URL = null
+
+// PLACEHOLDER — Formspree (or any POST endpoint). null → the form falls back to
+// a pre-filled WhatsApp message so leads are never lost.
+export const FORM_ENDPOINT = null
+
+// Real — observed on the gym's reels.
+export const INSTAGRAM_URL = 'https://www.instagram.com/ancient_combat_evolution/'
+
+// Real — from public listings (verify exact unit before launch).
+export const ADDRESS =
+  '2, Ashoka Street, Sri Ram Colony, Abiramapuram, Alwarpet, Chennai 600018'
+
+// Address-query Google Maps embed (no API key). Swap to a pinned embed once
+// exact coordinates are confirmed.
+export const MAPS_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(ADDRESS)}&output=embed`
+export const MAPS_DIRECTIONS = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ADDRESS)}`
+
+export const WHATSAPP_MESSAGE = 'Hi Ancient Combat Evolution, I want to book a trial class.'
+export const WHATSAPP_URL = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
+export const TEL_URL = `tel:+${PHONE_E164}`
+
+// Backlink to the Brand-Alchemy agency homepage (relative from the deployed sub-path).
+export const AGENCY_URL = '../../'
