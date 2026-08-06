@@ -1,0 +1,8 @@
+node_modules
+dist
+dist-ssr
+verify-shots
+brag-output
+assets/*.mp4
+hero_screenshot.png
+test_hero.py

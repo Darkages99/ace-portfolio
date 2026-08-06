@@ -23,3 +23,5 @@ assets/*.mp4
 
 # generated marketing/brag video output, not part of the site
 brag-output/
+
+.vercel
