@@ -9,9 +9,9 @@
 //      Anything marked PLACEHOLDER is intentionally inert.
 // ---------------------------------------------------------------------------
 
-// PLACEHOLDER — gym's real phone. Powers tel:, WhatsApp, and schema.
-export const PHONE_DISPLAY = '+91 00000 00000'
-export const PHONE_E164 = '910000000000'
+// Real — gym's phone. Powers tel:, WhatsApp, and schema.
+export const PHONE_DISPLAY = '+91 99401 40907'
+export const PHONE_E164 = '919940140907'
 
 // PLACEHOLDER — booking link (e.g. Calendly). null → the "Book" CTAs scroll to
 // the on-page form instead of opening an external scheduler.

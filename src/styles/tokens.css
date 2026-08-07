@@ -39,7 +39,7 @@
   --fs-small: 0.8125rem;
 
   /* --- Space / layout --- */
-  --maxw: 1200px;
+  --maxw: clamp(1200px, 90vw, 2200px);
   --gutter: clamp(1.25rem, 5vw, 4rem);
   --section-y: clamp(2.5rem, 5vw, 4rem);
   --radius: 4px;        /* sharp, geometric — minimal rounding */

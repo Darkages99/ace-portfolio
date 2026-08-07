@@ -160,8 +160,8 @@ ul { list-style: none; padding: 0; }
 .hero__inner {
   position: relative; z-index: 2; max-width: var(--maxw); margin-inline: auto;
   padding-inline: var(--gutter); width: 100%;
-  display: grid; grid-template-columns: 1.04fr 0.96fr;
-  gap: clamp(2rem, 5vw, 4.5rem); align-items: start;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3.25rem); align-items: center;
 }
 .hero__text { max-width: 40rem; }
 /* disciplines (line 1) + location (line 2), gold caps, no dash. Sits just
@@ -169,30 +169,77 @@ ul { list-style: none; padding: 0; }
 .hero__over {
   display: flex; flex-direction: column; gap: 0.35rem;
   color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase;
-  font-size: clamp(0.85rem, 1.4vw, 1.05rem); font-weight: 600;
+  font-size: clamp(0.95rem, 1.7vw, 1.2rem); font-weight: 600;
   margin-top: clamp(1.3rem, 2.6vh, 2rem);
 }
 .hero__over-loc { color: var(--text-dim); font-weight: 500; letter-spacing: 0.12em; }
 .hero__title {
   font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
-  font-size: clamp(3rem, 6.6vw, 6.6rem); line-height: 1; letter-spacing: 0.01em;
+  font-size: clamp(3.4rem, 7.6vw, 7.6rem); line-height: 1; letter-spacing: 0.01em;
   text-shadow: 0 2px 30px rgba(0,0,0,0.6);
 }
 /* each word on its own line with even breathing room between them */
 .hero__title span { display: block; }
 .hero__title span + span { margin-top: 0.08em; }
-.hero__cta { margin-top: clamp(1.6rem, 3.5vh, 2.4rem); display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero__cta { margin-top: clamp(1.6rem, 3.5vh, 2.4rem); display: flex; gap: 1.1rem; flex-wrap: wrap; }
+/* hero CTAs read bigger than the standard .btn--lg used elsewhere (nav,
+   forms) — scoped here so it doesn't inflate every other CTA on the page. */
+.hero__cta .btn { padding: 1.4rem 2.6rem; font-size: 1.08rem; }
 
 /* right column — clean cinematic training loop (reuses the .reel poster→video
-   machinery; no overlay word, softer vignette, gold frame + glow) */
+   machinery; no overlay word, softer vignette, gold frame). The wrap carries
+   the actual sizing so the ghost frames inside it (inset:0, then rotated)
+   bleed relative to the frame itself, not the whole hero column. Sized to
+   fill its grid track so it reads as one composition with the text column
+   instead of a smaller card floating in leftover space. */
+.hero__media-wrap {
+  position: relative; justify-self: end; width: 100%; max-width: 560px;
+  aspect-ratio: 4 / 5; max-height: min(74svh, 700px);
+  --ghost-rot: 6deg; --ghost-x: 20px; --ghost-y: 16px;
+}
+/* decorative echoes of the same still, fanned out behind the live frame —
+   dimmed and desaturated so they read as depth, not competing content.
+   .hero clips overflow at the section level, so the rotated bleed is safe. */
+.hero__ghost {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(10,10,10,0.3), rgba(10,10,10,0.8)),
+    center/cover no-repeat url('./assets/hero-spar.webp');
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow);
+  filter: saturate(0.55) brightness(0.55);
+}
+.hero__ghost--1 { transform: rotate(calc(-1 * var(--ghost-rot))) translate(calc(-1 * var(--ghost-x)), var(--ghost-y)); opacity: 0.6; }
+.hero__ghost--2 {
+  z-index: -1; opacity: 0.4; filter: saturate(0.4) brightness(0.4);
+  transform: rotate(var(--ghost-rot)) translate(var(--ghost-x), calc(var(--ghost-y) * 1.6));
+}
 .hero__media {
-  justify-self: end; width: 100%; max-width: 460px;
-  aspect-ratio: 4 / 5; max-height: min(68svh, 620px);
-  border-color: var(--line);
+  position: relative; z-index: 1; width: 100%; height: 100%;
+  border-radius: 0; border-color: var(--line-soft);
   box-shadow: var(--shadow), 0 0 60px -20px rgba(212,175,55,0.4);
 }
 .hero__media.reel::after {
   background: linear-gradient(180deg, rgba(10,10,10,0) 58%, rgba(10,10,10,0.5) 100%);
+  z-index: 1;
+}
+/* CONCEPT D — viewfinder brackets + tag plate */
+.hero__media::before {
+  content: ''; position: absolute; inset: 14px; z-index: 2; pointer-events: none;
+  background:
+    linear-gradient(var(--gold), var(--gold)) 0 0/28px 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 0 0/2px 28px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 100% 0/28px 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 100% 0/2px 28px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 0 100%/28px 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 0 100%/2px 28px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 100% 100%/28px 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 100% 100%/2px 28px no-repeat;
+}
+.hero__media-tag {
+  position: absolute; left: 14px; bottom: 14px; z-index: 2;
+  background: var(--gold); color: #111; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; font-size: 0.68rem; padding: 0.45rem 0.8rem;
 }
 
 .hero__scroll {
@@ -215,10 +262,13 @@ ul { list-style: none; padding: 0; }
 .prog__tag { margin-top: 1.2rem; align-self: flex-start; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--line); padding: 0.35rem 0.7rem; border-radius: 100px; }
 
 /* --------------------------------- vault --------------------------------- */
+.vault-carousel { position: relative; }
 .vault-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
   grid-auto-rows: 1fr;
 }
+/* arrows only do anything on the mobile carousel layout below; hidden here */
+.vault-arrow { display: none; }
 .reel {
   position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--surface);
   border: 1px solid var(--line-soft); aspect-ratio: 9 / 16;
@@ -264,27 +314,90 @@ ul { list-style: none; padding: 0; }
 .stats__n { display: block; font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--gold); line-height: 1; }
 .stats__l { display: block; margin-top: 0.4rem; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); }
 
-/* reviews — continuous marquee. Track holds set A + an aria-hidden clone; the
-   animation slides exactly one set width (-50%) for a seamless, non-stop flow.
-   Per-card margin-right (not flex gap) keeps the loop point exact, no jerk. */
+/* ------------------------- reviews: filterable photo wall ------------------------ */
+/* "Find members like you" — gender + age filters narrow REVIEWS, then an
+   infinite photo-carousel (src/lib/reviews-wall.js) rebuilds itself from the
+   matching set. Track holds N reps of the matching set + a hidden clone of
+   the same reps, sized until it's wide enough to loop cleanly; JS derives
+   --wall-dur from the built width so the visual speed (PX_PER_SEC) stays
+   constant no matter how many cards match. */
 .reviews-section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
-.reviews {
-  overflow: hidden; margin-top: clamp(1.5rem, 3vw, 2.5rem);
+.pf__filters { display: flex; flex-wrap: wrap; gap: clamp(0.75rem, 2vw, 1.25rem); margin-top: clamp(1.5rem, 3vw, 2.5rem); }
+.pf__group {
+  display: flex; align-items: center; gap: clamp(0.85rem, 2vw, 1.25rem);
+  padding: clamp(0.85rem, 2vw, 1.15rem) clamp(1.1rem, 2.4vw, 1.5rem);
+  background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--radius);
+}
+.pf__group--gender { flex: 0 1 auto; }
+.pf__group--age { flex: 1 1 auto; }
+.pf__label {
+  position: relative; padding-left: 0.85rem; white-space: nowrap;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text);
+}
+.pf__label::before {
+  content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 1.05em; background: var(--gold); border-radius: 1px;
+}
+.pf__row { flex: 1; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.pf__btn {
+  font-weight: 600; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-dim); background: transparent; border: 1px solid var(--line-soft);
+  border-radius: var(--radius); padding: 0.42rem 0.8rem; min-height: 40px;
+  display: inline-flex; align-items: center; cursor: pointer;
+  transition: color 0.18s var(--ease), border-color 0.18s var(--ease), background 0.18s var(--ease), transform 0.12s var(--ease);
+}
+.pf__btn:hover { color: var(--text); border-color: var(--line); transform: translateY(-1px); }
+.pf__btn.is-active { color: #111; background: var(--gold); border-color: var(--gold); }
+.pf__count {
+  margin-top: clamp(1rem, 2.4vw, 1.4rem); font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint);
+}
+.pf__count b { color: var(--gold); }
+
+.wall__carousel { position: relative; margin-top: clamp(1.25rem, 3vw, 2rem); }
+.wall__viewport {
+  overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
-.reviews__track { display: flex; width: max-content; animation: review-marquee 55s linear infinite; }
-.review {
-  flex: 0 0 clamp(260px, 28vw, 360px); margin-right: 1rem;
-  background: var(--surface); border: 1px solid var(--line-soft); border-left: 3px solid var(--gold);
-  border-radius: var(--radius); padding: 1.6rem;
+.wall__track { display: flex; align-items: stretch; width: max-content; will-change: transform; }
+.wall__track.is-animating { animation: wall-scroll var(--wall-dur, 60s) linear infinite; }
+/* reading a card: hover/keyboard focus/touch slows it way down (not a full
+   stop) so it still reads as "alive". JS mirrors hover for touch (no native
+   hover there) via .is-touched. */
+.wall__carousel:hover .wall__track.is-animating,
+.wall__carousel:focus-within .wall__track.is-animating,
+.wall__carousel.is-touched .wall__track.is-animating { animation-duration: calc(var(--wall-dur, 60s) * 6); }
+@keyframes wall-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.qcard {
+  flex: 0 0 clamp(260px, 25vw, 330px); margin-right: 1rem;
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--radius-lg); overflow: hidden;
 }
-.review p { font-size: 0.98rem; color: var(--text); }
-.review cite { display: block; margin-top: 1rem; font-style: normal; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); }
-@keyframes review-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.qcard__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #000; }
+.qcard__media img { width: 100%; height: 100%; object-fit: cover; }
+.qcard__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, var(--surface) 2%, transparent 46%); }
+.qcard__tag {
+  position: absolute; top: 0.6rem; left: 0.6rem; z-index: 2;
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #111;
+  background: var(--gold); padding: 0.28rem 0.55rem; border-radius: 2px;
+}
+.qcard__body { display: flex; flex-direction: column; flex: 1; padding: 1.1rem 1.2rem 1.3rem; }
+.qcard__quote { font-size: 0.92rem; line-height: 1.55; color: var(--text); font-style: italic; }
+.qcard__by { margin-top: auto; padding-top: 0.9rem; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--text-faint); }
+.qcard__by b { color: var(--gold); font-weight: 600; font-style: normal; }
+
+.wall__static { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+.wall__static .qcard { flex: 0 0 300px; margin-right: 0; }
+
+@media (max-width: 760px) {
+  .pf__filters { flex-direction: column; }
+  .pf__group { width: 100%; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .reviews { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
-  .reviews__track { animation: none; }
+  .wall__track { animation: none; width: auto; }
+  .wall__viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
 }
 
 /* ------------------------------- schedule -------------------------------- */
@@ -357,11 +470,25 @@ ul { list-style: none; padding: 0; }
 
 /* ----------------------------- responsive -------------------------------- */
 @media (max-width: 980px) {
-  /* hero stacks: headline over the embers, framed video directly below */
-  .hero { min-height: auto; padding-block: calc(var(--nav-h) + 2.5rem) 4rem; }
-  .hero__inner { grid-template-columns: 1fr; gap: clamp(2rem, 6vw, 3rem); }
-  .hero__text { max-width: none; }
-  .hero__media { justify-self: center; max-width: 360px; }
+  /* hero goes side-by-side: headline+CTA on the left, video shrinks to a
+     tall strip on the right instead of stacking full-width beneath */
+  .hero { min-height: auto; padding-block: calc(var(--nav-h) + 2.5rem) 3rem; }
+  .hero__inner {
+    grid-template-columns: 1fr auto; align-items: start;
+    gap: clamp(1rem, 4vw, 2rem);
+  }
+  .hero__text { max-width: none; min-width: 0; }
+  .hero__title { font-size: clamp(2.3rem, 9vw, 3.7rem); }
+  .hero__cta { flex-direction: column; align-items: flex-start; }
+  .hero__cta .btn { padding: 1.15rem 2rem; font-size: 0.98rem; }
+  .hero__media-wrap {
+    justify-self: end; width: clamp(96px, 30vw, 160px); max-width: none;
+    aspect-ratio: 3 / 4; max-height: none;
+    /* full offsets would flood the narrow strip — pull the fan in tight */
+    --ghost-rot: 4deg; --ghost-x: 7px; --ghost-y: 6px;
+  }
+  /* no room for a caption plate on a strip this narrow */
+  .hero__media-tag { display: none; }
   .hero__scroll { display: none; }
   .prog-grid { grid-template-columns: repeat(2, 1fr); }
   .proof-grid { grid-template-columns: 1fr 1fr; }
@@ -381,15 +508,35 @@ ul { list-style: none; padding: 0; }
   .nav__links a { padding: 1rem 0; border-bottom: 1px solid var(--line-soft); width: 100%; }
   .nav__cta { display: none; }
   .nav__toggle { display: flex; }
-  .vault-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* vault becomes a snap-scrolling, auto-looping carousel — one clip at a
+     time instead of a tall 2-up grid the user has to scroll the whole page
+     to get through. Native scroll-snap means it still works with JS off;
+     initVaultCarousel() in main.js only layers on autoplay + the arrows. */
+  .vault-grid {
+    display: flex; grid-template-columns: none; overflow-x: auto; gap: 1rem;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+    padding-bottom: 0.25rem; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .vault-grid::-webkit-scrollbar { display: none; }
+  .vault-grid .reel { flex: 0 0 min(78vw, 340px); scroll-snap-align: center; }
+  .vault-arrow {
+    display: grid; place-items: center; position: absolute; top: 50%; z-index: 3;
+    width: 38px; height: 38px; border-radius: 50%; transform: translateY(-50%);
+    background: rgba(10,10,10,0.7); border: 1px solid var(--line); color: var(--text);
+    font-size: 1.3rem; line-height: 1; backdrop-filter: blur(4px);
+  }
+  .vault-arrow--prev { left: 0.35rem; }
+  .vault-arrow--next { right: 0.35rem; }
+  .vault-arrow:hover { border-color: var(--gold); color: var(--gold); }
+
   .reel--tall { grid-row: span 2; }
   .stats { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
   .reviews, .sched-grid { grid-template-columns: 1fr; }
-  .hero__media { max-width: min(82vw, 340px); }
 }
 
 @media (max-width: 460px) {
   .prog-grid { grid-template-columns: 1fr; }
-  .vault-grid { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr; }
 }

@@ -1,0 +1,153 @@
+/* ===========================================================================
+   ACE — mobile layer. A phone-only (≤600px) reimagining of the site.
+
+   WHY a separate, media-gated file: the desktop/tablet design is finished and
+   must stay pixel-identical. 600px sits below the existing 760px tablet rules
+   and below iPad-portrait (768px), so tablets keep today's behaviour and only
+   phones get this layout. Same HTML DOM as desktop → full SEO content parity
+   (mobile-first indexing). Loaded LAST, so it wins the cascade on phones.
+
+   Design principles applied here (the why, not the how):
+     • Single column, vertical rhythm — no shrunk desktop grids.
+     • One persistent thumb-zone CTA (.mcta) → the money action is always a tap
+       away. Biggest CRO lever for a local gym.
+     • Poster-first video: tap to play, one clip at a time (see reels.js mobile
+       path). ~50MB of clips never auto-download → fast LCP, low data, no jank.
+     • Capped media heights so photos/clips never dominate the viewport.
+     • 44px+ touch targets, notch/home-bar safe areas.
+   =========================================================================== */
+
+/* The mobile-only sticky CTA is hidden everywhere by default; the phone media
+   query switches it on. Kept in THIS file so main.css / desktop stay untouched. */
+.mcta { display: none; }
+
+@media (max-width: 600px) {
+  /* ------------------------------ rhythm / type ------------------------------ */
+  :root {
+    --gutter: 1.25rem;
+    --section-y: clamp(2.75rem, 9vw, 3.5rem);
+  }
+  /* clear the fixed bottom CTA so the footer is never hidden behind it */
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  /* menu jumps land clear of the fixed nav instead of tucking under it */
+  .hero, .section, .reviews-section, [id] { scroll-margin-top: calc(var(--nav-h) + 0.6rem); }
+
+  .section__title { font-size: clamp(2rem, 9.2vw, 2.9rem); }
+  .section__lead { font-size: 1.02rem; }
+  .eyebrow { margin-bottom: 0.75rem; }
+
+  /* --------------------------------- nav ------------------------------------ */
+  .nav__brandtext { font-size: 0.98rem; }
+  .nav__links { padding-bottom: 1.5rem; }
+
+  /* --------------------------------- hero ----------------------------------- */
+  /* Full-bleed single column: headline + stacked full-width CTAs on the ember
+     field (kept off the photo for contrast), then a wide cinematic poster band.
+     No hero video on phones — the poster is the LCP and it paints instantly. */
+  .hero { min-height: auto; padding-top: calc(var(--nav-h) + 1.4rem); padding-bottom: 2.5rem; }
+  .hero__inner { grid-template-columns: 1fr; gap: 1.6rem; align-items: start; }
+  .hero__text { max-width: none; }
+  .hero__title { font-size: clamp(2.9rem, 15vw, 4.2rem); }
+  .hero__over { margin-top: 1rem; font-size: 0.92rem; }
+  .hero__cta { flex-direction: column; align-items: stretch; gap: 0.8rem; margin-top: 1.5rem; }
+  .hero__cta .btn { width: 100%; padding: 1.15rem 1.4rem; font-size: 1rem; }
+
+  .hero__media-wrap {
+    justify-self: stretch; width: 100%; max-width: none;
+    aspect-ratio: 5 / 4; max-height: 52svh;
+  }
+  .hero__ghost { display: none; }              /* fanned frames are noise this small */
+  .hero__media-tag { display: block; left: 12px; bottom: 12px; }
+  .hero__media::before { inset: 12px; }         /* pull the viewfinder brackets in */
+  .hero__scroll { display: none; }
+
+  /* --------------------------------- stats ---------------------------------- */
+  .stats { grid-template-columns: repeat(2, 1fr); gap: 1.4rem 1rem; }
+  .stats__n { font-size: clamp(2rem, 11vw, 2.8rem); }
+
+  /* -------------------------------- programs -------------------------------- */
+  /* Text-only cards are cheap to stack — a scannable list beats a squeezed grid.
+     Number + title share a row; blurb sits beneath. */
+  .prog-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+  .prog {
+    min-height: 0; padding: 1.2rem 1.3rem;
+    flex-direction: row; align-items: baseline; flex-wrap: wrap; gap: 0.7rem;
+  }
+  .prog:hover { transform: none; }              /* no hover lift on touch */
+  .prog__num { font-size: 1.05rem; margin: 0; }
+  .prog__title { margin-top: 0; font-size: 1.5rem; flex: 1; }
+  .prog__blurb { flex-basis: 100%; margin-top: 0.3rem; font-size: 0.95rem; }
+
+  /* --------------------------------- vault ---------------------------------- */
+  /* Keep the swipe carousel. reels.js adds .is-tappable on phones; a play badge
+     invites the tap, and only the tapped clip loads/plays (one at a time). */
+  .vault-grid .reel { flex: 0 0 min(82vw, 340px); }
+  .reel.is-tappable { cursor: pointer; }
+  .reel.is-tappable::before {
+    content: '▶';
+    position: absolute; inset: 0; margin: auto; z-index: 3;
+    width: 56px; height: 56px; display: grid; place-items: center;
+    padding-left: 3px; border-radius: 50%;
+    background: rgba(212, 175, 55, 0.94); color: #111; font-size: 1.15rem;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.55);
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .reel.is-playing::before { opacity: 0; transform: scale(0.6); pointer-events: none; }
+
+  /* --------------------------------- proof ---------------------------------- */
+  /* Cap the picture heights (the "photos are too big" fix): the medals photo is
+     a controlled full-width band, the two clips are portrait tiles below it. */
+  .proof-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 0.7rem; }
+  .proof__media--wide { grid-column: 1 / -1; aspect-ratio: 16 / 10; max-height: 44svh; }
+  .proof .reel { aspect-ratio: 9 / 16; }
+
+  /* -------------------------------- reviews --------------------------------- */
+  .pf__btn { min-height: 44px; padding: 0.5rem 0.9rem; font-size: 0.74rem; }
+  .qcard { flex: 0 0 82vw; max-width: 320px; margin-right: 0.85rem; }
+  .qcard__quote { font-size: 0.95rem; }
+
+  /* -------------------------------- schedule -------------------------------- */
+  .sched-grid { gap: 0.85rem; }
+  .sched { padding: 1.5rem 1.4rem; }
+
+  /* -------------------------------- location -------------------------------- */
+  .location__addr { font-size: 1.08rem; }
+  .location__meta div { grid-template-columns: 84px 1fr; }
+  .location__map { aspect-ratio: 4 / 3; max-height: 50svh; }
+  .location__cta { gap: 0.7rem; }
+  .location__cta .btn { flex: 1; }
+
+  /* ---------------------------------- book ---------------------------------- */
+  .book__form { padding: 1.4rem 1.25rem; }
+  .book__copy .btn--whatsapp { width: 100%; }
+
+  /* --------------------------------- footer --------------------------------- */
+  .footer__grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .footer__base { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+
+  /* ----------------------- sticky primary CTA (money) ----------------------- */
+  /* One persistent action, always in the thumb zone → opens WhatsApp. The
+     desktop floating bubble folds into this so there's a single clear CTA. */
+  .fab { display: none; }
+  .mcta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 95;
+    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+    padding: 0.95rem 1.25rem calc(0.95rem + env(safe-area-inset-bottom, 0px));
+    background: var(--gold); color: #111;
+    font-family: var(--font-display); font-weight: 400;
+    text-transform: uppercase; letter-spacing: 0.06em; font-size: 1.08rem; line-height: 1;
+    border-top: 1px solid rgba(0, 0, 0, 0.18);
+    box-shadow: 0 -10px 30px -6px rgba(0, 0, 0, 0.55);
+    transition: transform 0.35s var(--ease), background 0.2s var(--ease);
+  }
+  .mcta svg { width: 22px; height: 22px; }
+  .mcta:active { background: var(--gold-ember); }
+  /* slid away by JS while the on-page booking form is in view (it has its own
+     CTA there) and while the nav drawer is open */
+  .mcta--hidden { transform: translateY(120%); }
+}
+
+/* Older engines without :has simply keep the bar visible with the menu — fine. */
+@media (max-width: 600px) {
+  body:has(.nav.is-open) .mcta { transform: translateY(120%); }
+}

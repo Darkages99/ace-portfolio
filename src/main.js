@@ -6,7 +6,9 @@
 
 import './styles/tokens.css'
 import './styles/main.css'
+import './styles/mobile.css'
 import { detectTier } from './lib/tiers.js'
+import { initReviewsWall } from './lib/reviews-wall.js'
 import {
   TEL_URL, WHATSAPP_URL, WHATSAPP_MESSAGE, INSTAGRAM_URL,
   MAPS_DIRECTIONS, MAPS_EMBED, AGENCY_URL, BOOKING_URL,
@@ -76,6 +78,60 @@ function initReveal() {
     }
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 })
   els.forEach((el) => io.observe(el))
+}
+
+/* ------------------------------ vault carousel ------------------------------ */
+// Mobile-only (<=760px, matches the CSS breakpoint that turns .vault-grid into
+// a horizontal snap track). Autoplay advances one card at a time and loops
+// back to the start; arrows and manual scrolling both reset the autoplay timer
+// instead of fighting it. Desktop grid layout is untouched — nothing below
+// does anything unless the mobile media query is active.
+function initVaultCarousel() {
+  const carousel = $('[data-carousel]')
+  const track = $('[data-track]', carousel || document)
+  if (!carousel || !track) return
+  const prevBtn = $('[data-prev]', carousel)
+  const nextBtn = $('[data-next]', carousel)
+  const mq = matchMedia('(max-width: 760px)')
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)')
+  let timer = null
+
+  const cardStep = () => {
+    const card = track.querySelector('.reel')
+    if (!card) return track.clientWidth
+    const gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0
+    return card.getBoundingClientRect().width + gap
+  }
+  const lastIndex = () => track.children.length - 1
+  const currentIndex = () => Math.round(track.scrollLeft / (cardStep() || 1))
+  const goTo = (i) => {
+    const max = lastIndex()
+    const idx = ((i % (max + 1)) + (max + 1)) % (max + 1)
+    track.scrollTo({ left: idx * cardStep(), behavior: 'smooth' })
+  }
+  const next = () => goTo(currentIndex() + 1)
+  const prev = () => goTo(currentIndex() - 1)
+
+  const stop = () => { if (timer) { clearInterval(timer); timer = null } }
+  const start = () => {
+    stop()
+    if (!mq.matches || reduced.matches) return
+    timer = setInterval(() => {
+      // don't scroll a clip away while the user is watching one (mobile tap-to-play)
+      if (document.body.classList.contains('reel-playing')) return
+      currentIndex() >= lastIndex() ? track.scrollTo({ left: 0, behavior: 'smooth' }) : next()
+    }, 3200)
+  }
+
+  prevBtn?.addEventListener('click', () => { prev(); start() })
+  nextBtn?.addEventListener('click', () => { next(); start() })
+  track.addEventListener('touchstart', stop, { passive: true })
+  track.addEventListener('touchend', () => setTimeout(start, 2500))
+  track.addEventListener('mouseenter', stop)
+  track.addEventListener('mouseleave', () => setTimeout(start, 800))
+  mq.addEventListener('change', start)
+
+  start()
 }
 
 /* -------------------------------- lazy map --------------------------------- */
@@ -149,12 +205,29 @@ function initForm() {
   })
 }
 
+/* ------------------------ mobile sticky CTA (≤600px) ------------------------ */
+// Slide the persistent WhatsApp CTA out of the way while the on-page booking
+// form is in view — it already has its own submit + WhatsApp button there, so
+// the bar would just cover content. No-op on desktop (the bar is display:none).
+function initStickyCta() {
+  const cta = $('.mcta')
+  const book = $('#book')
+  if (!cta || !book || !('IntersectionObserver' in window)) return
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) cta.classList.toggle('mcta--hidden', e.isIntersecting)
+  }, { threshold: 0.18 })
+  io.observe(book)
+}
+
 /* ---------------------------------- boot ----------------------------------- */
 wireLinks()
 initNav()
 initReveal()
 initMap()
 initForm()
+initVaultCarousel()
+initReviewsWall()
+initStickyCta()
 const y = $('#year'); if (y) y.textContent = String(new Date().getFullYear())
 
 // Defer all heavy enhancement (reels, 3D void, smooth scroll) past first paint,
