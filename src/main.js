@@ -82,10 +82,9 @@ function initReveal() {
 
 /* ------------------------------ vault carousel ------------------------------ */
 // Mobile-only (<=760px, matches the CSS breakpoint that turns .vault-grid into
-// a horizontal snap track). Autoplay advances one card at a time and loops
-// back to the start; arrows and manual scrolling both reset the autoplay timer
-// instead of fighting it. Desktop grid layout is untouched — nothing below
-// does anything unless the mobile media query is active.
+// a horizontal snap track). It auto-advances on its own — but the moment the
+// user takes over (a swipe, drag, or an arrow tap) it hands control to them for
+// good: autoplay stops and they scroll freely. Desktop grid is untouched.
 function initVaultCarousel() {
   const carousel = $('[data-carousel]')
   const track = $('[data-track]', carousel || document)
@@ -95,6 +94,7 @@ function initVaultCarousel() {
   const mq = matchMedia('(max-width: 760px)')
   const reduced = matchMedia('(prefers-reduced-motion: reduce)')
   let timer = null
+  let manual = false   // once the user interacts, autoplay yields to them
 
   const cardStep = () => {
     const card = track.querySelector('.reel')
@@ -115,20 +115,18 @@ function initVaultCarousel() {
   const stop = () => { if (timer) { clearInterval(timer); timer = null } }
   const start = () => {
     stop()
-    if (!mq.matches || reduced.matches) return
+    if (manual || !mq.matches || reduced.matches) return
     timer = setInterval(() => {
-      // don't scroll a clip away while the user is watching one (mobile tap-to-play)
-      if (document.body.classList.contains('reel-playing')) return
       currentIndex() >= lastIndex() ? track.scrollTo({ left: 0, behavior: 'smooth' }) : next()
     }, 3200)
   }
 
-  prevBtn?.addEventListener('click', () => { prev(); start() })
-  nextBtn?.addEventListener('click', () => { next(); start() })
-  track.addEventListener('touchstart', stop, { passive: true })
-  track.addEventListener('touchend', () => setTimeout(start, 2500))
-  track.addEventListener('mouseenter', stop)
-  track.addEventListener('mouseleave', () => setTimeout(start, 800))
+  // first real interaction → manual mode, autoplay off for the rest of the visit
+  const takeOver = () => { manual = true; stop() }
+  track.addEventListener('touchstart', takeOver, { passive: true, once: true })
+  track.addEventListener('pointerdown', takeOver, { once: true }) // mouse drag / stylus
+  prevBtn?.addEventListener('click', () => { takeOver(); prev() })
+  nextBtn?.addEventListener('click', () => { takeOver(); next() })
   mq.addEventListener('change', start)
 
   start()

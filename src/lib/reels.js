@@ -11,8 +11,7 @@ export function initReels() {
   const reels = [...document.querySelectorAll('.reel[data-video]')]
   if (!reels.length || !('IntersectionObserver' in window)) return
 
-  // Phones: poster-first, tap-to-play, one clip at a time. The ~50MB of video
-  // never auto-downloads — it loads only when a visitor taps a clip.
+  // Phones: every reel autoplays and loops while it's on screen.
   if (isPhone()) return initReelsMobile(reels)
 
   const io = new IntersectionObserver((entries) => {
@@ -35,44 +34,22 @@ export function initReels() {
   })
 }
 
-// Phone playback: the hero stays a still (no autoplay video), every other reel
-// gets a play badge and plays on tap. Starting one pauses the current one, so a
-// single <video> is ever active — cheap on data, battery and decode.
+// Phone playback: every reel (hero + the rest) autoplays and loops, muted and
+// inline, while it's on screen — and pauses the moment it scrolls out of view
+// (and on a hidden tab) so we never decode a clip nobody's looking at. In the
+// vault carousel roughly one card is centred at a time, so playback stays cheap.
 function initReelsMobile(reels) {
-  const playable = reels.filter((f) => !isHero(f))
-  let current = null
-
-  const stopCurrent = () => {
-    if (!current) return
-    const v = current.querySelector('video')
-    if (v) v.pause()
-    current.classList.remove('is-playing')
-    current = null
-    document.body.classList.remove('reel-playing')
-  }
-
-  playable.forEach((fig) => {
-    fig.classList.add('is-tappable')
-    fig.addEventListener('click', () => {
-      if (current === fig) { stopCurrent(); return }  // tap again → pause
-      stopCurrent()
-      const v = ensure(fig)
-      v.loop = true
-      v.preload = 'auto'
-      current = fig
-      document.body.classList.add('reel-playing')
-      try { v.currentTime = 0 } catch { /* metadata not ready yet */ }
-      safePlay(v)
-    })
-  })
-
-  // Pause the active clip once it scrolls out of view (battery + data).
   const io = new IntersectionObserver((entries) => {
-    for (const e of entries) if (!e.isIntersecting && e.target === current) stopCurrent()
-  }, { threshold: 0.2 })
-  playable.forEach((f) => io.observe(f))
+    for (const e of entries) {
+      if (e.isIntersecting) { const v = ensure(e.target); v.loop = true; v.preload = 'auto'; safePlay(v) }
+      else { const v = e.target.querySelector('video'); if (v) v.pause() }
+    }
+  }, { rootMargin: '150px 0px', threshold: 0.25 })
+  reels.forEach((f) => io.observe(f))
 
-  document.addEventListener('visibilitychange', () => { if (document.hidden) stopCurrent() })
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) reels.forEach((f) => { const v = f.querySelector('video'); if (v) v.pause() })
+  })
 }
 
 const isHero = (fig) => fig.classList.contains('hero__media')
