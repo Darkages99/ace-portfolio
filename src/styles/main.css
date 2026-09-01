@@ -44,6 +44,10 @@ ul { list-style: none; padding: 0; }
 
 .g { color: var(--gold); }
 
+/* Inline key-word / key-phrase highlight inside body copy. Gold + a touch
+   heavier so the important words carry against the matte-black background. */
+.hl { color: var(--gold); font-weight: 600; }
+
 .eyebrow {
   font-size: var(--fs-small);
   letter-spacing: 0.28em;

@@ -16,8 +16,8 @@
   --gold-deep:     #9a7d23;   /* pressed / shadow gold            */
 
   --text:          #f0ede6;   /* off-white (never pure #fff)      */
-  --text-dim:      #b4ada1;   /* secondary text                   */
-  --text-faint:    #7d776c;   /* meta / captions                  */
+  --text-dim:      #cdc6ba;   /* secondary text (brighter for legibility) */
+  --text-faint:    #9c9587;   /* meta / captions (brighter for legibility) */
 
   --danger:        #c8503c;   /* form errors (kept muted)         */
 
