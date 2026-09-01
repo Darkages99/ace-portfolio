@@ -43,10 +43,12 @@ if you have sharper footage.
 | Priority | Section | What the placeholder needs | Target filename | Spec |
 |---|---|---|---|---|
 | P0 | Hero (right) | A real beginner class warming up — friendly, un-intimidating | `beginners-hero.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
-| P1 | Session band — clip 1 | Technique drilled slow: a jab or guard on the pads | `session-technique.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
-| P1 | Session band — clip 2 | A beginner on the heavy bag at a relaxed pace | `session-bag.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
-| P1 | Session band — clip 3 | Skipping / footwork warm-up | `session-footwork.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
-| P0 | Testimonials ×3 | Real **beginner** member portrait + name + consent + quote | `member-beg-1.webp`, `-2`, `-3` | Portrait 4:5. First-timer / over-40 / Fight-Camp stories |
+| P1 | Winding timeline — node 1 (0–5 min) | A coach greeting a nervous first-timer, wrapping their hands | `session-welcome.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P1 | Winding timeline — node 2 (5–15 min) | Skipping and footwork warm-up, relaxed pace | `session-footwork.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P1 | Winding timeline — node 3 (15–35 min) | Technique drilled slow: a jab or guard on the pads | `session-technique.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P1 | Winding timeline — node 4 (35–50 min) | A beginner landing clean rounds on the heavy bag | `session-bag.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P1 | Winding timeline — node 5 (50–60 min) | Cool-down stretch + coach talking through next steps | `session-cooldown.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P0 | Testimonials carousel ×6 | Real **beginner** member portrait + name + consent + quote | `member-beg-1.webp` … `-6` | Portrait 4:5. First-timer / over-40 / desk-job / Fight-Camp / returner stories (carousel shows 3 at a time) |
 
 ## Free Trial (`/free-trial/`)
 | Priority | Section | What the placeholder needs | Target filename | Spec |

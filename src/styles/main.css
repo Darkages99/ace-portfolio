@@ -44,9 +44,10 @@ ul { list-style: none; padding: 0; }
 
 .g { color: var(--gold); }
 
-/* Inline key-word / key-phrase highlight inside body copy. Gold + a touch
-   heavier so the important words carry against the matte-black background. */
-.hl { color: var(--gold); font-weight: 600; }
+/* Inline key-word / key-phrase highlight inside body copy. Bright championship
+   gold + a touch heavier so the important words genuinely pop against the
+   matte-black background — never a dull, muddy gold. */
+.hl { color: var(--gold-ember); font-weight: 700; text-shadow: 0 0 18px rgba(245,196,81,0.18); }
 
 .eyebrow {
   font-size: var(--fs-small);

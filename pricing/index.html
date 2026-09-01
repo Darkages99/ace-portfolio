@@ -40,7 +40,7 @@
   </head>
 
   <body>
-    <a class="skip-link" href="#ladder">Skip to fees</a>
+    <a class="skip-link" href="#membership">Skip to fees</a>
 
     <header class="nav" id="nav">
       <div class="nav__inner">
@@ -80,10 +80,10 @@
             </p>
             <div class="phero__cta">
               <a href="/free-trial/" class="btn btn--gold btn--lg">Book a Free Trial</a>
-              <a href="#ladder" class="btn btn--ghost btn--lg">See every fee</a>
+              <a href="#challenge" class="btn btn--ghost btn--lg">See the challenge</a>
             </div>
           </div>
-          <figure class="phero__media media-frame">
+          <figure class="phero__media media-frame" data-parallax>
             <div class="ph"><div class="ph__label">
               <svg class="ph__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 9 6-3v12l-6-3"/></svg>
               <span class="ph__tag">Placeholder · video</span>
@@ -95,20 +95,75 @@
         </div>
       </section>
 
-      <!-- ============================ TERM LADDER ============================ -->
-      <section class="section" id="ladder">
+      <!-- ============================ FEATURED CHALLENGE ============================ -->
+      <!-- The Fight Camp leads the fees page: the single headline offer, framed as
+           a challenge with a live scarcity line and a book-now CTA. -->
+      <section class="section" id="challenge">
         <div class="wrap">
           <header class="section__head reveal">
-            <p class="eyebrow">Group training</p>
-            <h2 class="section__title">The <span class="g">term ladder.</span></h2>
+            <span class="featured__flag">Featured challenge</span>
+            <h2 class="section__title" style="margin-top:1rem">The 6-Week <span class="g">Beginner Fight Camp.</span></h2>
+            <p class="section__lead">Built for people who haven't exercised in years and are done with gyms where nobody notices they stopped coming. <span class="hl">Lose 6 kg and two waist sizes in six weeks, or train free until you do.</span></p>
+          </header>
+
+          <div class="featured reveal">
+            <div class="camp__grid">
+              <div>
+                <p class="pcard__eyebrow">Alwarpet · 8 people per cohort</p>
+                <div class="camp__price">
+                  <span class="camp__now">₹9,999</span>
+                  <span class="camp__was">₹18,500 value</span>
+                </div>
+                <div class="slots"><span class="slots__dot" aria-hidden="true"></span><span data-slots="3">Next cohort: <b>3 of 8 spots left</b></span></div>
+                <ul class="stack">
+                  <li><span>30 coached sessions over 6 weeks (5 days a week)</span><span>₹7,500</span></li>
+                  <li><span>Groups capped at 8, real coaching every session</span><span>included</span></li>
+                  <li><span>Personal nutrition chart by a certified dietician</span><span>₹4,000</span></li>
+                  <li><span>Two nutrition reviews (weeks 2 &amp; 4)</span><span>₹2,000</span></li>
+                  <li><span>Body-composition assessment at weeks 0, 3 &amp; 6</span><span>₹1,500</span></li>
+                  <li><span>Private WhatsApp accountability group + check-ins</span><span>₹1,500</span></li>
+                  <li><span>ACE hand wraps</span><span>₹500</span></li>
+                  <li><span>Bring-a-friend week (week 5, one guest free)</span><span>₹1,500</span></li>
+                  <li class="stack__total"><span>Total stated value</span><span>₹18,500</span></li>
+                </ul>
+              </div>
+              <div>
+                <div class="guarantee">
+                  <p class="pcard__eyebrow">The “Win Your Camp Back” guarantee</p>
+                  <p style="margin-top:0.6rem;color:var(--text-dim)">
+                    Attend <strong>24 of your 30 sessions</strong>, log your food in the group and
+                    complete all three body-comp check-ins. If you haven't lost 6 kg or two inches
+                    off your waist, <strong>your next six weeks are on us, free, until you get
+                    there.</strong>
+                  </p>
+                </div>
+                <p style="color:var(--text-dim);margin-top:1.25rem">
+                  Prefer to spread it? The camp splits into <span class="hl">2 × ₹5,250</span> or
+                  <span class="hl">3 × ₹3,666</span>. Cohorts are genuinely <span class="hl">capped at eight</span>,
+                  so once a cohort fills, the next start date is weeks away.
+                </p>
+                <a href="/free-trial/" class="btn btn--gold btn--lg" style="margin-top:1.5rem;width:100%">Book Before Slots Run Out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ MEMBERSHIP (subscription) ============================ -->
+      <section class="section" id="membership">
+        <div class="wrap">
+          <header class="section__head reveal">
+            <p class="eyebrow">Ongoing membership</p>
+            <h2 class="section__title">Group <span class="g">memberships.</span></h2>
             <p class="section__lead">
-              We bill in <span class="hl">4-week cycles</span>, so your payment always lands on the
-              same weekday and your training blocks line up. The headline stays ₹5,000.
-              <span class="hl">Commit for longer and the effective monthly rate drops all the way to 24% off.</span>
+              Once the camp's done, this is how members keep training. We bill in
+              <span class="hl">4-week cycles</span>, so your payment always lands on the same weekday.
+              The headline stays ₹5,000, and <span class="hl">the longer you commit, the lower your
+              monthly rate drops, all the way to 24% off.</span>
             </p>
           </header>
 
-          <div class="ladder-grid reveal">
+          <div class="ladder-grid reveal" data-stagger>
             <div class="ladder">
               <div class="ladder__head">
                 <h3 class="ladder__title">5 days / week</h3>
@@ -174,101 +229,19 @@
         </div>
       </section>
 
-      <!-- ============================ FIGHT CAMP (right under the ladder) ============ -->
+      <!-- ============================ SEMI-PRIVATE & PRIVATE (upsell) ============ -->
+      <!-- Semi-private sits above one-to-one PT: smaller group first, then the
+           fully private option. Each card shouts the one thing it alone gives. -->
       <section class="section">
         <div class="wrap">
           <header class="section__head reveal">
-            <p class="eyebrow">The flagship offer</p>
-            <h2 class="section__title">The 6-Week <span class="g">Beginner Fight Camp.</span></h2>
-            <p class="section__lead">Built for people who haven't exercised in years and are done with gyms where nobody notices they stopped coming. <span class="hl">Lose 6 kg and two waist sizes in six weeks, or train free until you do.</span></p>
-          </header>
-
-          <div class="camp reveal">
-            <div class="camp__grid">
-              <div>
-                <p class="pcard__eyebrow">Alwarpet · 8 people per cohort · Next start date on request</p>
-                <div class="camp__price">
-                  <span class="camp__now">₹9,999</span>
-                  <span class="camp__was">₹20,500 value</span>
-                </div>
-                <ul class="stack">
-                  <li><span>30 coached sessions over 6 weeks (5 days a week)</span><span>₹7,500</span></li>
-                  <li><span>Groups capped at 8, real coaching every session</span><span>included</span></li>
-                  <li><span>Personal nutrition chart by a certified dietician</span><span>₹4,000</span></li>
-                  <li><span>Two nutrition reviews (weeks 2 &amp; 4)</span><span>₹2,000</span></li>
-                  <li><span>Body-composition assessment at weeks 0, 3 &amp; 6</span><span>₹1,500</span></li>
-                  <li><span>“Eating Out in Chennai” guide, 20 restaurants</span><span>₹1,000</span></li>
-                  <li><span>“Your First Punch” home practice video library</span><span>₹1,000</span></li>
-                  <li><span>Private WhatsApp accountability group + check-ins</span><span>₹1,500</span></li>
-                  <li><span>ACE hand wraps</span><span>₹500</span></li>
-                  <li><span>Bring-a-friend week (week 5, one guest free)</span><span>₹1,500</span></li>
-                  <li class="stack__total"><span>Total stated value</span><span>₹20,500</span></li>
-                </ul>
-              </div>
-              <div>
-                <div class="guarantee">
-                  <p class="pcard__eyebrow">The “Win Your Camp Back” guarantee</p>
-                  <p style="margin-top:0.6rem;color:var(--text-dim)">
-                    Attend <strong>24 of your 30 sessions</strong>, log your food in the group and
-                    complete all three body-comp check-ins. If you haven't lost 6 kg or two inches
-                    off your waist, <strong>your next six weeks are on us, free, until you get
-                    there.</strong>
-                  </p>
-                </div>
-                <p style="color:var(--text-dim);margin-top:1.25rem">
-                  Prefer to spread it? The camp splits into <span class="hl">2 × ₹5,250</span> or
-                  <span class="hl">3 × ₹3,666</span>. Cohorts are genuinely capped at eight, so
-                  places are limited and we'll tell you exactly how many are left.
-                </p>
-                <a href="/free-trial/" class="btn btn--gold btn--lg" style="margin-top:1.5rem;width:100%">Start With a Free Trial</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================ PERSONAL TRAINING (upsell) ============ -->
-      <section class="section">
-        <div class="wrap">
-          <header class="section__head reveal">
-            <p class="eyebrow">Go one-to-one</p>
-            <h2 class="section__title">Personal training <span class="g">packs.</span></h2>
-            <p class="section__lead">Full coach focus, sold in blocks so you commit to the work and <span class="hl">save as you go.</span> Still comfortably below the market leader's ₹2,000 a session.</p>
-          </header>
-          <div class="card-grid card-grid--3 reveal">
-            <article class="pcard">
-              <h3 class="pcard__title">Single session</h3>
-              <p class="pcard__price">₹1,500</p>
-              <p class="pcard__meta">Per one-hour session</p>
-            </article>
-            <article class="pcard pcard--gold">
-              <span class="pcard__eyebrow">Save 17%</span>
-              <h3 class="pcard__title">10-session pack</h3>
-              <p class="pcard__price">₹12,500 <small>· ₹1,250 / session</small></p>
-              <p class="pcard__meta">The committed block</p>
-            </article>
-            <article class="pcard">
-              <span class="pcard__eyebrow">Save 27%</span>
-              <h3 class="pcard__title">20-session pack</h3>
-              <p class="pcard__price">₹22,000 <small>· ₹1,100 / session</small></p>
-              <p class="pcard__meta">Serious transformation</p>
-            </article>
-          </div>
-          <p class="note-line reveal">Already a member? Add one PT session a week for <span class="hl">₹4,000 / 4 weeks.</span></p>
-        </div>
-      </section>
-
-      <!-- ============================ PREMIUM + NUTRITION (top of the ladder) === -->
-      <section class="section">
-        <div class="wrap">
-          <header class="section__head reveal">
-            <p class="eyebrow">The top of the ladder</p>
-            <h2 class="section__title">Semi-private &amp; <span class="g">nutrition tiers.</span></h2>
+            <p class="eyebrow">Smaller groups, more attention</p>
+            <h2 class="section__title">Semi-private &amp; <span class="g">private tiers.</span></h2>
             <p class="section__lead">For members who want the <span class="hl">smallest groups, the most coach attention</span> and a plan rewritten around them every few weeks.</p>
           </header>
-          <div class="card-grid card-grid--3 reveal">
+          <div class="card-grid card-grid--3 reveal" data-stagger>
             <article class="pcard pcard--gold">
-              <span class="pcard__eyebrow">Six spots total</span>
+              <span class="pcard__eyebrow">Semi-private · six spots total</span>
               <h3 class="pcard__title">ACE Signature · 1:4</h3>
               <p class="pcard__price">₹15,000 <small>/ 4 weeks</small></p>
               <ul class="pcard__list">
@@ -278,9 +251,10 @@
                 <li>Monthly body-comp &amp; programme rewrite</li>
                 <li>Priority booking on every slot</li>
               </ul>
+              <p class="only-here"><b>Only here:</b> a coached group of just four, with a private 1-on-1 built into every single week.</p>
             </article>
             <article class="pcard">
-              <span class="pcard__eyebrow">Two spots at a time</span>
+              <span class="pcard__eyebrow">Private · two spots at a time</span>
               <h3 class="pcard__title">ACE 90</h3>
               <p class="pcard__price">₹45,000 <small>/ 12 weeks</small></p>
               <ul class="pcard__list">
@@ -289,6 +263,7 @@
                 <li>Weekly dietician review</li>
                 <li>Weekly check-in call</li>
               </ul>
+              <p class="only-here"><b>Only here:</b> three fully private PT sessions every week plus unlimited group access, our most hands-on tier.</p>
             </article>
             <article class="pcard">
               <span class="pcard__eyebrow">Add-on</span>
@@ -299,8 +274,43 @@
                 <li>Monthly plan rewrite</li>
                 <li>WhatsApp access to the dietician</li>
               </ul>
+              <p class="only-here"><b>Only here:</b> direct WhatsApp access to your dietician between sessions, not just a chart handed over once.</p>
             </article>
           </div>
+        </div>
+      </section>
+
+      <!-- ============================ PERSONAL TRAINING (upsell) ============ -->
+      <section class="section">
+        <div class="wrap">
+          <header class="section__head reveal">
+            <p class="eyebrow">Go one-to-one</p>
+            <h2 class="section__title">Personal training <span class="g">packs.</span></h2>
+            <p class="section__lead">Full coach focus, sold in blocks so you commit to the work and <span class="hl">the more you buy, the less each session costs.</span></p>
+          </header>
+          <div class="card-grid card-grid--3 reveal" data-stagger>
+            <article class="pcard">
+              <h3 class="pcard__title">Single session</h3>
+              <p class="pcard__price">₹1,500</p>
+              <p class="pcard__meta">Per one-hour session</p>
+              <p class="only-here"><b>Only here:</b> a full hour of one-to-one coaching with zero commitment, try it once.</p>
+            </article>
+            <article class="pcard pcard--gold">
+              <span class="badge-save">Save 17%</span>
+              <h3 class="pcard__title">10-session pack</h3>
+              <p class="pcard__price">₹12,500 <small>· ₹1,250 / session</small></p>
+              <p class="pcard__meta">The committed block</p>
+              <p class="only-here"><b>Only here:</b> 17% off every session and a coach who programs your whole block, not one-off hours.</p>
+            </article>
+            <article class="pcard">
+              <span class="badge-save">Save 27%</span>
+              <h3 class="pcard__title">20-session pack</h3>
+              <p class="pcard__price">₹22,000 <small>· ₹1,100 / session</small></p>
+              <p class="pcard__meta">Serious transformation</p>
+              <p class="only-here"><b>Only here:</b> your lowest per-session price at ₹1,100, built for a real start-to-finish transformation.</p>
+            </article>
+          </div>
+          <p class="note-line reveal">Already a member? Add one PT session a week for <span class="hl">₹4,000 / 4 weeks.</span></p>
         </div>
       </section>
 
@@ -308,7 +318,7 @@
       <section class="section">
         <div class="wrap">
           <div class="pfeature reveal">
-            <figure class="media-frame">
+            <figure class="media-frame" data-parallax>
               <div class="ph"><div class="ph__label">
                 <svg class="ph__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 9 6-3v12l-6-3"/></svg>
                 <span class="ph__tag">Placeholder · video</span>
@@ -335,9 +345,9 @@
       <section class="section">
         <div class="wrap">
           <header class="section__head reveal">
-            <p class="eyebrow">An honest buyer's guide</p>
-            <h2 class="section__title">How to compare <span class="g">MMA gyms in Chennai.</span></h2>
-            <p class="section__lead">Before you sign anywhere, ask these seven questions. They matter more than the sticker price, and they're the reason our members stay.</p>
+            <p class="eyebrow">The honest comparison</p>
+            <h2 class="section__title">Why <span class="g">our gym.</span></h2>
+            <p class="section__lead">Seven questions worth asking before you sign anywhere. They matter more than the sticker price, and they're <span class="hl">exactly why our members stay.</span></p>
           </header>
           <div class="compare-wrap reveal">
             <table class="compare">
@@ -370,7 +380,7 @@
             <h2 class="section__title">Members who did <span class="g">the maths, and stayed.</span></h2>
             <p class="section__lead"><span class="hl">Real members, real words.</span> The value on this page only means something once you've felt it on the mats.</p>
           </header>
-          <div class="qgrid reveal">
+          <div class="qgrid reveal" data-stagger>
             <figure class="qcard">
               <div class="qcard__media"><span class="qcard__tag">Boxing</span><div class="ph"><div class="ph__label"><svg class="ph__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><span class="ph__tag">Placeholder · photo</span><span class="ph__what">Real member portrait + name &amp; consent</span></div></div></div>
               <div class="qcard__body">
@@ -400,30 +410,30 @@
       <!-- ============================ FAQ ============================ -->
       <section class="section">
         <div class="wrap">
-          <header class="section__head reveal">
+          <header class="section__head faq-head reveal">
             <p class="eyebrow">Money questions</p>
             <h2 class="section__title">Straight <span class="g">answers.</span></h2>
           </header>
           <div class="faqs reveal">
             <details class="faq">
               <summary>Is there a joining fee?</summary>
-              <div class="faq__a"><p>Yes, a one-time ₹1,500 joining fee, and it's waived entirely on the 6-cycle and annual (13-cycle) terms. Commit for the longer block and it disappears.</p></div>
+              <div class="faq__a"><p>Yes, a one-time ₹1,500 joining fee, and it's <mark>waived entirely on the 6-cycle and annual (13-cycle) terms</mark>. Commit for the longer block and it disappears.</p></div>
             </details>
             <details class="faq">
               <summary>Can I pay monthly, or do EMI?</summary>
-              <div class="faq__a"><p>Yes. We take UPI and card, and monthly (4-week) billing is always available. The 6-Week Fight Camp can be split into 2 × ₹5,250 or 3 × ₹3,666.</p></div>
+              <div class="faq__a"><p>Yes. We take <mark>UPI and card</mark>, and monthly (4-week) billing is always available. The 6-Week Fight Camp can be split into <mark>2 × ₹5,250 or 3 × ₹3,666</mark>.</p></div>
             </details>
             <details class="faq">
               <summary>Can I pause my membership?</summary>
-              <div class="faq__a"><p>Yes. For genuine reasons like travel, illness or a work crunch, we'll freeze your cycle. Because we bill in 4-week blocks rather than calendar months, a pause simply shifts your next start date; you never lose paid time.</p></div>
+              <div class="faq__a"><p>Yes. For genuine reasons like travel, illness or a work crunch, we'll <mark>freeze your cycle</mark>. Because we bill in 4-week blocks rather than calendar months, a pause simply shifts your next start date; <mark>you never lose paid time</mark>.</p></div>
             </details>
             <details class="faq">
               <summary>Do you offer refunds?</summary>
-              <div class="faq__a"><p>Your first session is free, so you try before you buy. Beyond that, the Fight Camp carries the “Win Your Camp Back” guarantee: do the work and if you don't hit the target, your next six weeks are free until you do. That's a stronger promise than a refund. It's a promise of the result.</p></div>
+              <div class="faq__a"><p>Your <mark>first session is free</mark>, so you try before you buy. Beyond that, the Fight Camp carries the “Win Your Camp Back” guarantee: do the work and if you don't hit the target, <mark>your next six weeks are free until you do</mark>. That's a stronger promise than a refund. It's a promise of the result.</p></div>
             </details>
             <details class="faq">
               <summary>Why do you bill every 4 weeks instead of monthly?</summary>
-              <div class="faq__a"><p>So your payment always lands on the same weekday and your training blocks line up cleanly. It's how most combat gyms worldwide bill, and it keeps everything predictable for you.</p></div>
+              <div class="faq__a"><p>So your payment always lands on the <mark>same weekday</mark> and your training blocks line up cleanly. It's how most combat gyms worldwide bill, and it keeps everything predictable for you.</p></div>
             </details>
           </div>
         </div>
@@ -437,7 +447,7 @@
           <p class="section__lead reveal" style="margin-inline:auto">Numbers on a page only tell you so much. Book a free session, meet a coach, and decide once you've actually trained.</p>
           <div class="phero__cta reveal" style="justify-content:center;margin-top:2rem">
             <a href="/free-trial/" class="btn btn--gold btn--lg">Book Your Free Trial</a>
-            <a class="btn btn--ghost btn--lg" href="/beginners/">New to this? Start here</a>
+            <a class="btn btn--ghost btn--lg" href="/beginners/">First time in a gym? Start here</a>
           </div>
         </div>
       </section>
