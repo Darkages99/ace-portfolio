@@ -5,30 +5,126 @@
    =========================================================================== */
 
 /* --------------------------------- page hero -------------------------------- */
+/* Same ambient ember field as the homepage hero (the static gradient the WebGL
+   void falls back to), so subpage heroes read as part of the same arena instead
+   of a plain dark band. A faint championship-crest watermark sits behind the
+   copy on the right, echoing the logo. */
 .phero {
   position: relative;
-  padding-top: calc(var(--nav-h) + clamp(2.5rem, 7vw, 5.5rem));
-  padding-bottom: clamp(2rem, 5vw, 3.5rem);
-  background: radial-gradient(120% 90% at 82% -10%, rgba(212, 175, 55, 0.12), var(--bg) 60%);
+  padding-top: calc(var(--nav-h) + clamp(2.5rem, 7vw, 5rem));
+  padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  overflow: hidden;
+  background:
+    radial-gradient(58% 64% at 78% 40%, rgba(212,175,55,0.20) 0%, rgba(212,175,55,0) 60%),
+    radial-gradient(70% 70% at 12% 80%, rgba(212,175,55,0.08) 0%, rgba(10,10,10,0) 55%),
+    radial-gradient(120% 120% at 50% 120%, rgba(212,175,55,0.05) 0%, rgba(10,10,10,0) 55%),
+    var(--bg);
   border-bottom: 1px solid var(--line);
 }
-.phero__inner { max-width: 60rem; }
+.phero::before {
+  content: ''; position: absolute; z-index: 0; pointer-events: none;
+  right: clamp(-8rem, -6vw, -3rem); top: 50%; translate: 0 -50%;
+  width: min(52vw, 640px); aspect-ratio: 1;
+  background: center/contain no-repeat url('/assets/logo.webp');
+  opacity: 0.06; filter: grayscale(1) brightness(1.5);
+}
+.phero > .wrap { position: relative; z-index: 1; }
+/* text column: a left-aligned reading measure like the homepage, NOT a narrow
+   centred block floating in the middle of the page */
+.phero__inner { max-width: 44rem; }
+.phero__grid {
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center;
+}
 .phero__title {
   font-family: var(--font-display);
   font-weight: 400;
   text-transform: uppercase;
   line-height: 0.95;
   letter-spacing: 0.01em;
-  font-size: clamp(2.6rem, 8vw, 6rem);
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
   margin-top: 0.6rem;
 }
 .phero__lead {
   margin-top: 1.25rem;
   color: var(--text-dim);
   font-size: var(--fs-lead);
-  max-width: 62ch;
+  max-width: 60ch;
 }
 .phero__cta { margin-top: clamp(1.6rem, 3.5vw, 2.4rem); display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* ------------------------------ media components ----------------------------- */
+/* A gold-bracketed frame around an <img> or a natively-autoplaying <video>
+   (page.js has no reels engine, so subpage clips use muted/autoplay/loop). */
+.media-frame {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid var(--line-soft); background: var(--surface);
+  box-shadow: var(--shadow), 0 0 60px -24px rgba(212,175,55,0.5);
+  aspect-ratio: 4 / 5;
+}
+.media-frame > img, .media-frame > video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.media-frame::before {
+  content: ''; position: absolute; inset: 12px; z-index: 2; pointer-events: none;
+  background:
+    linear-gradient(var(--gold), var(--gold)) 0 0/26px 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 0 0/2px 26px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 100% 0/26px 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 100% 0/2px 26px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 0 100%/26px 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 0 100%/2px 26px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 100% 100%/26px 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) 100% 100%/2px 26px no-repeat;
+  opacity: 0.85;
+}
+.media-frame__tag {
+  position: absolute; left: 12px; bottom: 12px; z-index: 3;
+  background: var(--gold); color: #111; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; font-size: 0.66rem; padding: 0.42rem 0.75rem;
+}
+.phero__media { position: relative; }
+
+/* image/video beside a block of copy */
+.pfeature { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
+.pfeature--rev > .media-frame { order: -1; }
+.pfeature__body .section__title { margin-bottom: 0.4rem; }
+
+/* a row of tall training clips */
+.media-band { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.75rem, 2vw, 1.1rem); }
+.media-band .media-frame { aspect-ratio: 9 / 16; }
+.media-band .media-frame__cap {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  padding: 1.6rem 0.9rem 0.8rem; font-size: 0.8rem; color: var(--text);
+  background: linear-gradient(0deg, rgba(10,10,10,0.9), transparent);
+}
+
+/* --------------------------- asset placeholders ----------------------------- */
+/* Clearly-marked "photo/video goes here" spaces, in the ACE black+gold key, so
+   real media can be dropped in later without guessing intent. Same idea as the
+   Manthan site: a hatched tint, an icon, and a label naming the exact asset.
+   Every one of these is catalogued in ASSETS-NEEDED.md at the repo root. */
+.ph {
+  position: relative; width: 100%; height: 100%;
+  display: grid; place-items: center; text-align: center;
+  background:
+    repeating-linear-gradient(-45deg, rgba(212,175,55,0.055) 0 14px, transparent 14px 28px),
+    linear-gradient(150deg, var(--surface-2) 0%, var(--surface) 100%);
+  color: var(--text-faint);
+}
+.ph__label { padding: 1.2rem 1.3rem; display: grid; gap: 0.55rem; justify-items: center; }
+.ph__icon { width: 2.4rem; height: 2.4rem; color: var(--gold); opacity: 0.85; }
+.ph__tag { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.ph__what { font-weight: 600; font-size: 0.9rem; color: var(--text-dim); max-width: 24ch; line-height: 1.4; }
+.ph__spec { font-size: 0.72rem; color: var(--text-faint); letter-spacing: 0.02em; }
+.media-frame > .ph { position: absolute; inset: 0; }
+.ph-figure { margin: 0; }
+.ph-figure figcaption { margin-top: 0.65rem; font-size: 0.8rem; color: var(--text-faint); font-style: italic; }
+
+/* ------------------------------- testimonials ------------------------------- */
+/* Static, crawlable version of the homepage review card, laid out as a grid. */
+.qgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.5vw, 1.5rem); }
+.qgrid .qcard { margin-right: 0; }
+.qcard--tv .qcard__media { aspect-ratio: 3 / 4; }
+.qcard__media .ph { position: absolute; inset: 0; }
 
 /* breadcrumb */
 .crumbs { font-size: 0.8rem; letter-spacing: 0.04em; color: var(--text-faint); }
@@ -64,10 +160,20 @@
 .ptable thead th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); font-weight: 600; }
 .ptable td:last-child, .ptable th:last-child { text-align: right; }
 .ptable tr:last-child td { border-bottom: 0; }
-.ptable .is-best td { background: linear-gradient(90deg, rgba(212,175,55,0.10), transparent); }
-.ptable .is-best td:first-child { font-weight: 700; color: var(--text); }
-.ptable .price { font-family: var(--font-display); color: var(--gold); font-size: 1.15rem; letter-spacing: 0.02em; }
-.ptable .save { color: var(--gold-ember); font-weight: 600; }
+/* best-value (annual) row: a clean, solid gold-tinted band with a bright gold
+   left rail — reads as "this is the one" instead of a muddy fading wash */
+.ptable .is-best td { background: rgba(212,175,55,0.09); border-bottom-color: rgba(212,175,55,0.22); }
+.ptable .is-best td:first-child {
+  font-weight: 700; color: var(--text); position: relative;
+  box-shadow: inset 4px 0 0 var(--gold);
+}
+.ptable .price { font-family: var(--font-display); color: var(--gold); font-size: 1.2rem; letter-spacing: 0.02em; }
+/* a saving is a win — show it as a solid gold pill, not faint text */
+.ptable .save {
+  display: inline-block; background: var(--gold); color: #111; font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 0.03em; padding: 0.2rem 0.55rem; border-radius: 100px;
+}
+.ptable td.nosave { color: var(--text-faint); }
 
 /* per-session callout */
 .persession {
@@ -104,9 +210,10 @@
 .pcard__title { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: clamp(1.3rem, 2.6vw, 1.7rem); }
 .pcard__price { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--gold); line-height: 1; }
 .pcard__price small { font-size: 0.9rem; color: var(--text-faint); font-family: var(--font-body); letter-spacing: 0.06em; }
-.pcard__meta { color: var(--text-faint); font-size: 0.85rem; }
+.pcard__meta { color: var(--text-faint); font-size: 0.92rem; }
+.pcard__desc { color: var(--text-dim); font-size: 1rem; }
 .pcard__list { list-style: none; display: grid; gap: 0.5rem; margin-top: 0.4rem; }
-.pcard__list li { position: relative; padding-left: 1.5rem; color: var(--text-dim); font-size: 0.95rem; }
+.pcard__list li { position: relative; padding-left: 1.5rem; color: var(--text-dim); font-size: 1rem; }
 .pcard__list li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
 .pcard .btn { margin-top: auto; }
 
@@ -158,7 +265,7 @@
 .obj__q { font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
 .obj__q::before { content: "“"; color: var(--gold); }
 .obj__q::after { content: "”"; color: var(--gold); }
-.obj__a { color: var(--text-dim); font-size: 0.95rem; }
+.obj__a { color: var(--text-dim); font-size: 1.02rem; }
 
 /* ------------------------------ session timeline --------------------------- */
 .timeline { list-style: none; display: grid; gap: 0; position: relative; margin-top: 1rem; }
@@ -172,7 +279,7 @@
 .timeline li:last-child { border-bottom: 0; }
 .timeline__t { font-family: var(--font-display); color: var(--gold); font-size: 1.05rem; letter-spacing: 0.02em; }
 .timeline__d strong { color: var(--text); }
-.timeline__d { color: var(--text-dim); font-size: 0.95rem; }
+.timeline__d { color: var(--text-dim); font-size: 1.02rem; }
 
 /* ------------------------------ checklist band ----------------------------- */
 .bring-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.5vw, 1.5rem); }
@@ -184,7 +291,7 @@
 }
 .bring__icon { font-size: 1.6rem; }
 .bring h3 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: 1.2rem; margin: 0.5rem 0; }
-.bring p { color: var(--text-dim); font-size: 0.92rem; }
+.bring p { color: var(--text-dim); font-size: 1rem; }
 
 /* ---------------------------------- FAQ ------------------------------------ */
 .faqs { display: grid; gap: 0.75rem; max-width: 900px; }
@@ -208,7 +315,7 @@
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after { content: "+"; color: var(--gold); font-size: 1.4rem; line-height: 1; transition: transform 0.25s var(--ease); }
 .faq[open] summary::after { transform: rotate(45deg); }
-.faq__a { padding: 0 0 1.2rem; color: var(--text-dim); font-size: 0.95rem; max-width: 70ch; }
+.faq__a { padding: 0 0 1.2rem; color: var(--text-dim); font-size: 1.02rem; max-width: 70ch; }
 .faq__a p + p { margin-top: 0.6rem; }
 
 /* -------------------------------- info grid -------------------------------- */
@@ -225,8 +332,8 @@
 /* ------------------------------- partner banner ---------------------------- */
 .partner-banner {
   border: 1px dashed var(--line); border-radius: var(--radius-lg);
-  padding: 1rem 1.25rem; background: var(--surface);
-  color: var(--text-dim); font-size: 0.92rem;
+  padding: 1.1rem 1.35rem; background: var(--surface);
+  color: var(--text-dim); font-size: 1rem;
 }
 .partner-banner strong { color: var(--gold); }
 
@@ -243,12 +350,32 @@
 /* ----------------------------- utility spacing ----------------------------- */
 .section__sub { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: clamp(1.5rem, 4vw, 2.4rem); margin-bottom: 1.25rem; }
 .stack-gap > * + * { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
-.note-line { color: var(--text-faint); font-size: 0.85rem; margin-top: 1rem; }
+.note-line { color: var(--text-faint); font-size: 0.92rem; margin-top: 1rem; }
+
+/* --------------------------- highlight callout band ------------------------- */
+/* pulls one high-value fact (dietician included, guarantee) out of the flow */
+.callout {
+  display: grid; grid-template-columns: auto 1fr; align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  background: linear-gradient(160deg, rgba(212,175,55,0.12), var(--surface));
+  border: 1px solid var(--gold); border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 3vw, 2.1rem);
+}
+.callout__n { font-family: var(--font-display); font-size: clamp(2.4rem, 7vw, 4rem); color: var(--gold); line-height: 0.9; white-space: nowrap; }
+.callout__n small { display: block; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); font-family: var(--font-body); margin-top: 0.5rem; }
+.callout__body { color: var(--text-dim); font-size: 1.05rem; }
+.callout__body strong { color: var(--text); }
 
 /* --------------------------------- responsive ------------------------------- */
 @media (max-width: 860px) {
-  .ladder-grid, .camp__grid, .card-grid--3, .card-grid--2,
-  .obj-grid, .bring-grid, .info-grid, .coach { grid-template-columns: 1fr; }
-  .persession { grid-template-columns: 1fr; text-align: left; }
+  .ladder-grid, .camp__grid, .card-grid--3, .card-grid--2, .pfeature,
+  .obj-grid, .bring-grid, .info-grid, .coach, .qgrid { grid-template-columns: 1fr; }
+  .phero__grid { grid-template-columns: 1fr; }
+  .phero__media { max-width: 22rem; }
+  .pfeature--rev > .media-frame { order: 0; }
+  .persession, .callout { grid-template-columns: 1fr; text-align: left; }
   .timeline li { grid-template-columns: 72px 1fr; gap: 1rem; }
+}
+@media (max-width: 560px) {
+  .media-band { grid-template-columns: 1fr 1fr; }
 }
