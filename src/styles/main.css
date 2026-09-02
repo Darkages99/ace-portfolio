@@ -86,9 +86,11 @@ main > section:not(.hero):not(.phero):not(.book):nth-child(even)::before { right
 main > section:not(.hero):not(.phero) > .wrap { position: relative; z-index: 1; }
 /* the closing CTA band keeps its own radial glow; a centred crest suits it.
    Excluded from the even/odd alternation above (not just overridden) since on
-   several subpages .book lands on an even child and was winning on specificity,
-   shoving this crest left instead of centring it. */
-main > .section.book::before { right: 50%; translate: 50% calc(-50% + var(--wm-y)); opacity: 0.08; }
+   several subpages .book lands on an even child and was winning on specificity.
+   The base rule above (main > section...::before) is also MORE specific than
+   this one — it uses the `section` type selector where this uses `.section` as
+   a class, so without !important its right/translate never actually won. */
+main > .section.book::before { right: 50% !important; translate: 50% calc(-50% + var(--wm-y)) !important; opacity: 0.08 !important; }
 @media (prefers-reduced-motion: reduce) { main > section:not(.hero):not(.phero) { --wm-y: 0px !important; } }
 
 .section__head { max-width: 760px; margin-bottom: clamp(1.4rem, 3vw, 2.25rem); }
