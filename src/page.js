@@ -1,7 +1,9 @@
 // ---------------------------------------------------------------------------
 //  ACE — lean entry for the content subpages (pricing, beginners, free-trial,
 //  contact, weightlifting). Same design system as the homepage, but without the
-//  heavy homepage-only layers (Three.js void, reels, GSAP, reviews wall).
+//  heavy homepage-only layers (reels, reviews wall). The sitewide ember void
+//  (.ambient-field) still loads here, tier-gated the same way the homepage
+//  gates its own — see initAmbientVoid() at the bottom of this file.
 //
 //  Shares the tokens + main stylesheet with the homepage, plus pages.css for the
 //  subpage-only components, and reuses src/data/config.js for link wiring so the
@@ -14,6 +16,7 @@ import './styles/mobile.css'
 import './styles/pages.css'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { detectTier } from './lib/tiers.js'
 import {
   TEL_URL, WHATSAPP_URL, WHATSAPP_MESSAGE, INSTAGRAM_URL,
   MAPS_DIRECTIONS, MAPS_EMBED, AGENCY_URL, BOOKING_URL,
@@ -111,14 +114,6 @@ function initMotion() {
     gsap.fromTo(el, { y: 34 }, {
       y: -34, ease: 'none',
       scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
-    })
-  })
-
-  // Crest watermark drifts gently behind each section.
-  $$('main > .section').forEach((sec) => {
-    gsap.fromTo(sec, { '--wm-y': '-40px' }, {
-      '--wm-y': '40px', ease: 'none',
-      scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 1 },
     })
   })
 
@@ -293,6 +288,16 @@ function initStickyCta() {
   io.observe(anchor)
 }
 
+/* ------------------------- sitewide ember field (full tier) ----------------- */
+function initAmbientVoid() {
+  const tier = detectTier()
+  document.documentElement.classList.add('tier-' + tier)
+  if (tier !== 'full') return
+  const start = () => import('./three/void.js').then((m) => m.initVoid('.ambient-field')).catch(() => {})
+  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2500 })
+  else setTimeout(start, 1200)
+}
+
 /* ---------------------------------- boot ----------------------------------- */
 wireLinks()
 initNav()
@@ -302,4 +307,5 @@ initMotion()
 initMap()
 initForm()
 initStickyCta()
+initAmbientVoid()
 const y = $('#year'); if (y) y.textContent = String(new Date().getFullYear())

@@ -60,49 +60,32 @@ ul { list-style: none; padding: 0; }
 
 .section {
   padding-block: var(--section-y); position: relative;
-  /* ember-glow wash, every section site-wide — see comment below */
+  background-color: rgba(10, 10, 10, 0.9);
   background-image:
     radial-gradient(60% 70% at 85% 0%, rgba(212,175,55,0.10) 0%, rgba(212,175,55,0) 60%),
     radial-gradient(70% 70% at 10% 100%, rgba(212,175,55,0.06) 0%, rgba(10,10,10,0) 55%);
 }
-.section:nth-of-type(even) { background-color: var(--bg-2); }
+.section:nth-of-type(even) { background-color: rgba(13, 13, 13, 0.9); }
 
-/* ------------------------- ember-glow wash, every section ------------------- */
-/* The warm ember radial glow that used to live only in the hero fields (.hero,
-   .phero) now washes every .section site-wide, so the whole site reads as one
-   lit arena rather than flat dark bands. Declared as background-image (not the
-   background shorthand) on .section above so the even/odd background-color
-   alternation doesn't blow it away. Sections with their own richer glow (e.g.
-   .book) set the full background shorthand and simply override this. */
-
-/* ------------------------- per-section crest watermark ---------------------- */
-/* Every content section carries the ACE crest centred low in its background —
-   a large, faint, monochrome logo that makes the whole page read as one
-   branded arena rather than a stack of plain dark bands. Every direct child of
-   <main> gets it except the hero (.hero on the homepage, .phero on subpages),
-   which carries its own ember-field treatment instead — a logo there would
-   fight the headline. Shared here (not in pages.css) since both the homepage
-   (main.js) and subpages (page.js) load this file. Subpages additionally get a
-   gentle parallax drift via GSAP (page.js animates the --wm-y custom
-   property); the CSS default below keeps it static everywhere else.
-   Opacity is a custom property (--wm-op), not a plain declaration, precisely
-   so .book can override it without a specificity fight: the base ::before
-   selector below is more specific than a plain `.book::before` rule would be
-   (it uses the `section` type selector, `.book::before` only uses classes), so
-   a direct property override there would silently lose the cascade. */
-main > section:not(.hero):not(.phero) { position: relative; overflow: hidden; --wm-y: 0px; --wm-op: 0.1; }
-main > section:not(.hero):not(.phero)::before {
-  content: ''; position: absolute; z-index: 0; pointer-events: none;
-  top: 50%; right: 50%;
+/* ------------------------- sitewide ambient field ---------------------------- */
+/* One fixed, full-viewport layer (a single .ambient-field div, first child of
+   <body> on every page) instead of a crest + ember canvas per section. It used
+   to be per-section: each section got its own centred ::before crest, which
+   meant the mark popped in and out as you scrolled from section to section.
+   Now there's exactly one instance, pinned behind everything (z-index: -1) —
+   the page scrolls OVER it, so the crest and the drifting-embers canvas (the
+   same void.js used in the hero, mounted a second time at '.ambient-field' by
+   main.js/page.js on the full tier) read as one continuous backdrop.
+   For this to show through, every section needs a translucent — not fully
+   opaque — background; see the .section rules above and the .book/.stats-band/
+   .phero overrides that also had to drop their solid fills. */
+.ambient-field { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: var(--bg); }
+.ambient-field::before {
+  content: ''; position: absolute; inset: 0; margin: auto;
   width: min(48vw, 560px); aspect-ratio: 1;
-  translate: 50% calc(-50% + var(--wm-y));
   background: center/contain no-repeat url('/assets/logo.webp');
-  opacity: var(--wm-op); filter: grayscale(1) brightness(1.8);
+  opacity: 0.12; filter: grayscale(1) brightness(1.8);
 }
-main > section:not(.hero):not(.phero) > .wrap { position: relative; z-index: 1; }
-/* the closing CTA band gets a brighter crest to anchor the page's final beat */
-main > .section.book { --wm-op: 0.16; }
-@media (prefers-reduced-motion: reduce) { main > section:not(.hero):not(.phero) { --wm-y: 0px !important; } }
 
 .section__head { max-width: 760px; margin-bottom: clamp(1.4rem, 3vw, 2.25rem); }
 .section__title {
@@ -199,11 +182,13 @@ main > .section.book { --wm-op: 0.16; }
     radial-gradient(120% 120% at 50% 120%, rgba(212,175,55,0.06) 0%, rgba(10,10,10,0) 55%),
     #0a0a0a;
 }
-.hero__void-canvas {
+/* Shared by every void.js canvas — the hero's own instance, mounted at
+   .hero__void, and the sitewide instance mounted at .ambient-field. */
+.void-canvas {
   position: absolute; inset: 0; width: 100%; height: 100%;
   opacity: 0; transition: opacity 0.9s ease; pointer-events: none;
 }
-.hero__void-canvas.is-live { opacity: 1; }
+.void-canvas.is-live { opacity: 1; }
 
 .hero__inner {
   position: relative; z-index: 2; max-width: var(--maxw); margin-inline: auto;
@@ -356,7 +341,7 @@ main > .section.book { --wm-op: 0.16; }
 .proof .reel { aspect-ratio: auto; }
 
 /* stats band — sits immediately below the hero */
-.stats-band { padding-block: clamp(1.25rem, 3vw, 2rem); background: var(--bg-2); }
+.stats-band { padding-block: clamp(1.25rem, 3vw, 2rem); background: rgba(13, 13, 13, 0.9); }
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: clamp(1.4rem, 3vw, 2rem); }
 .stats li { text-align: center; }
 .stats__n { display: block; font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--gold); line-height: 1; }
@@ -470,7 +455,7 @@ main > .section.book { --wm-op: 0.16; }
 .location__map-ph { display: grid; place-items: center; height: 100%; color: var(--text-faint); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
 /* --------------------------------- book ---------------------------------- */
-.book { background: radial-gradient(120% 90% at 80% 0%, rgba(212,175,55,0.10), var(--bg-2)); }
+.book { background: radial-gradient(120% 90% at 80% 0%, rgba(212,175,55,0.10), rgba(13, 13, 13, 0.9)); }
 .book__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
 .book__copy .section__lead { margin-bottom: 2rem; }
 .book__form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.6rem, 3vw, 2.4rem); display: grid; gap: 1.1rem; box-shadow: var(--shadow); }

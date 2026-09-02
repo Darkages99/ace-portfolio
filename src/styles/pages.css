@@ -5,11 +5,9 @@
    =========================================================================== */
 
 /* --------------------------------- page hero -------------------------------- */
-/* Same ambient ember field as the homepage hero (the static gradient the WebGL
-   void falls back to), so subpage heroes read as part of the same arena instead
-   of a plain dark band. The hero deliberately carries NO logo watermark — the
-   crest lives behind every section BELOW the hero instead (see .section
-   watermark further down). */
+/* Same ambient ember glow as the homepage hero. The trailing fill is
+   translucent (not a solid colour) so the sitewide .ambient-field crest + void
+   canvas (see main.css) shows through here too, same as every other section. */
 .phero {
   position: relative;
   padding-top: calc(var(--nav-h) + clamp(2.5rem, 7vw, 5rem));
@@ -19,7 +17,7 @@
     radial-gradient(58% 64% at 78% 40%, rgba(212,175,55,0.20) 0%, rgba(212,175,55,0) 60%),
     radial-gradient(70% 70% at 12% 80%, rgba(212,175,55,0.08) 0%, rgba(10,10,10,0) 55%),
     radial-gradient(120% 120% at 50% 120%, rgba(212,175,55,0.05) 0%, rgba(10,10,10,0) 55%),
-    var(--bg);
+    rgba(10, 10, 10, 0.9);
   border-bottom: 1px solid var(--line);
 }
 .phero > .wrap { position: relative; z-index: 1; }

@@ -1,8 +1,13 @@
-// Hero ambient "void" — a slow gold ember field with a few faint god-ray shafts
-// drifting behind the headline. No fighter, no hologram, no scan-lines: just
-// atmosphere on the dark theme. Full tier only, dynamic-imported after idle.
-// Pauses off-screen / when the tab is hidden, and silently falls back to the
-// CSS gradient on any WebGL trouble (context loss, soft GPU stall).
+// Ambient "void" — a slow gold ember field drifting behind whatever it's
+// mounted in. No fighter, no hologram, no scan-lines: just atmosphere on the
+// dark theme. Full tier only, dynamic-imported after idle. Pauses off-screen /
+// when the tab is hidden, and silently falls back to the CSS gradient on any
+// WebGL trouble (context loss, soft GPU stall).
+//
+// Reusable: called once at '.hero__void' for the homepage hero's own field,
+// and again at '.ambient-field' (a fixed, full-viewport layer that's the
+// first child of <body> on every page) so the same drifting embers continue
+// underneath every section, not just the hero.
 
 import {
   Scene, PerspectiveCamera, WebGLRenderer, Color, FogExp2,
@@ -16,7 +21,6 @@ const BG = new Color('#0a0a0a')
 export function initVoid(mountSelector = '.hero__void') {
   const mount = document.querySelector(mountSelector)
   if (!mount) return () => {}
-  const hero = document.querySelector('.hero') || mount
 
   const renderer = new WebGLRenderer({
     alpha: true,
@@ -27,7 +31,7 @@ export function initVoid(mountSelector = '.hero__void') {
   renderer.setClearColor(0x000000, 0)
 
   const canvas = renderer.domElement
-  canvas.className = 'hero__void-canvas'
+  canvas.className = 'void-canvas'
   canvas.setAttribute('aria-hidden', 'true')
   mount.appendChild(canvas)
 
@@ -85,7 +89,7 @@ export function initVoid(mountSelector = '.hero__void') {
   const revealLive = () => {
     if (contextLost || revealed || okFrames < 3) return
     revealed = true
-    hero.classList.add('void-ready')
+    mount.classList.add('void-ready')
     canvas.classList.add('is-live')
   }
 
@@ -95,7 +99,7 @@ export function initVoid(mountSelector = '.hero__void') {
     revealed = false
     okFrames = 0
     stop()
-    hero.classList.remove('void-ready')
+    mount.classList.remove('void-ready')
     canvas.classList.remove('is-live')
   }
 
@@ -172,7 +176,7 @@ export function initVoid(mountSelector = '.hero__void') {
   }
 
   const inView = () => {
-    const r = hero.getBoundingClientRect()
+    const r = mount.getBoundingClientRect()
     return r.bottom > 0 && r.top < window.innerHeight
   }
 
@@ -188,7 +192,7 @@ export function initVoid(mountSelector = '.hero__void') {
     },
     { threshold: 0.05 },
   )
-  vis.observe(hero)
+  vis.observe(mount)
   document.addEventListener('visibilitychange', onVisibility)
 
   // Stall watchdog — context loss doesn't always fire on soft GPU stalls.
@@ -211,7 +215,7 @@ export function initVoid(mountSelector = '.hero__void') {
     for (const d of disposables) d?.dispose?.()
     renderer.dispose()
     canvas.remove()
-    hero.classList.remove('void-ready')
+    mount.classList.remove('void-ready')
   }
 }
 

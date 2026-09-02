@@ -15,9 +15,14 @@ export async function initEnhance(tier) {
 
   if (tier !== 'full') return
 
-  // full only — void owns fighter placement + camera orbit parallax
+  // full only — two independent void instances: the hero's own dense field,
+  // and a second one on the fixed sitewide .ambient-field layer so the same
+  // drifting embers continue underneath every section on the page.
   import('./three/void.js')
-    .then((m) => m.initVoid())
+    .then((m) => {
+      m.initVoid()
+      m.initVoid('.ambient-field')
+    })
     .catch(() => {})
 
   import('lenis')
