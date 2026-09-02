@@ -24,27 +24,8 @@
 }
 .phero > .wrap { position: relative; z-index: 1; }
 
-/* ------------------------- per-section crest watermark ---------------------- */
-/* Every content section below the hero carries the ACE crest low in its
-   background, exactly like the Wolfpack site — a large, faint, monochrome logo
-   that makes the whole page read as one branded arena rather than a stack of
-   plain dark bands. It gently parallax-drifts as you scroll (GSAP animates the
-   --wm-y custom property; the CSS default keeps it static without JS). Sections
-   alternate the crest left / right so it never feels like wallpaper. */
-main > .section { position: relative; overflow: hidden; --wm-y: 0px; }
-main > .section::before {
-  content: ''; position: absolute; z-index: 0; pointer-events: none;
-  top: 50%; right: -6%;
-  width: min(48vw, 560px); aspect-ratio: 1;
-  translate: 0 calc(-50% + var(--wm-y));
-  background: center/contain no-repeat url('/assets/logo.webp');
-  opacity: 0.05; filter: grayscale(1) brightness(1.6);
-}
-main > .section:nth-of-type(even)::before { right: auto; left: -6%; }
-main > .section > .wrap { position: relative; z-index: 1; }
-/* the closing CTA band keeps its own radial glow; a centred crest suits it */
-main > .section.book::before { right: 50%; translate: 50% calc(-50% + var(--wm-y)); opacity: 0.06; }
-@media (prefers-reduced-motion: reduce) { main > .section { --wm-y: 0px !important; } }
+/* Per-section crest watermark now lives in main.css (shared by the homepage
+   and every subpage) so it covers the homepage too — see the comment there. */
 /* text column: a left-aligned reading measure like the homepage, NOT a narrow
    centred block floating in the middle of the page */
 .phero__inner { max-width: 44rem; }
