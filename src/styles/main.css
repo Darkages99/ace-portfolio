@@ -82,10 +82,13 @@ main > section:not(.hero):not(.phero)::before {
   background: center/contain no-repeat url('/assets/logo.webp');
   opacity: 0.05; filter: grayscale(1) brightness(1.6);
 }
-main > section:not(.hero):not(.phero):nth-child(even)::before { right: auto; left: -6%; }
+main > section:not(.hero):not(.phero):not(.book):nth-child(even)::before { right: auto; left: -6%; }
 main > section:not(.hero):not(.phero) > .wrap { position: relative; z-index: 1; }
-/* the closing CTA band keeps its own radial glow; a centred crest suits it */
-main > .section.book::before { right: 50%; translate: 50% calc(-50% + var(--wm-y)); opacity: 0.06; }
+/* the closing CTA band keeps its own radial glow; a centred crest suits it.
+   Excluded from the even/odd alternation above (not just overridden) since on
+   several subpages .book lands on an even child and was winning on specificity,
+   shoving this crest left instead of centring it. */
+main > .section.book::before { right: 50%; translate: 50% calc(-50% + var(--wm-y)); opacity: 0.08; }
 @media (prefers-reduced-motion: reduce) { main > section:not(.hero):not(.phero) { --wm-y: 0px !important; } }
 
 .section__head { max-width: 760px; margin-bottom: clamp(1.4rem, 3vw, 2.25rem); }
