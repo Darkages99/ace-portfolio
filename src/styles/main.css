@@ -58,39 +58,50 @@ ul { list-style: none; padding: 0; }
   margin-bottom: 1rem;
 }
 
-.section { padding-block: var(--section-y); position: relative; }
-.section:nth-of-type(even) { background: var(--bg-2); }
+.section {
+  padding-block: var(--section-y); position: relative;
+  /* ember-glow wash, every section site-wide — see comment below */
+  background-image:
+    radial-gradient(60% 70% at 85% 0%, rgba(212,175,55,0.10) 0%, rgba(212,175,55,0) 60%),
+    radial-gradient(70% 70% at 10% 100%, rgba(212,175,55,0.06) 0%, rgba(10,10,10,0) 55%);
+}
+.section:nth-of-type(even) { background-color: var(--bg-2); }
+
+/* ------------------------- ember-glow wash, every section ------------------- */
+/* The warm ember radial glow that used to live only in the hero fields (.hero,
+   .phero) now washes every .section site-wide, so the whole site reads as one
+   lit arena rather than flat dark bands. Declared as background-image (not the
+   background shorthand) on .section above so the even/odd background-color
+   alternation doesn't blow it away. Sections with their own richer glow (e.g.
+   .book) set the full background shorthand and simply override this. */
 
 /* ------------------------- per-section crest watermark ---------------------- */
-/* Every content section carries the ACE crest low in its background — a large,
-   faint, monochrome logo that makes the whole page read as one branded arena
-   rather than a stack of plain dark bands, exactly like the Wolfpack site.
-   Every direct child of <main> gets it except the hero (.hero on the homepage,
-   .phero on subpages), which carries its own ember-field treatment instead —
-   a logo there would fight the headline. Shared here (not in pages.css) since
-   both the homepage (main.js) and subpages (page.js) load this file. Subpages
-   additionally get a gentle parallax drift via GSAP (page.js animates the
-   --wm-y custom property); the CSS default below keeps it static everywhere
-   else. Sections alternate the crest left / right so it never feels like
-   wallpaper. */
-main > section:not(.hero):not(.phero) { position: relative; overflow: hidden; --wm-y: 0px; }
+/* Every content section carries the ACE crest centred low in its background —
+   a large, faint, monochrome logo that makes the whole page read as one
+   branded arena rather than a stack of plain dark bands. Every direct child of
+   <main> gets it except the hero (.hero on the homepage, .phero on subpages),
+   which carries its own ember-field treatment instead — a logo there would
+   fight the headline. Shared here (not in pages.css) since both the homepage
+   (main.js) and subpages (page.js) load this file. Subpages additionally get a
+   gentle parallax drift via GSAP (page.js animates the --wm-y custom
+   property); the CSS default below keeps it static everywhere else.
+   Opacity is a custom property (--wm-op), not a plain declaration, precisely
+   so .book can override it without a specificity fight: the base ::before
+   selector below is more specific than a plain `.book::before` rule would be
+   (it uses the `section` type selector, `.book::before` only uses classes), so
+   a direct property override there would silently lose the cascade. */
+main > section:not(.hero):not(.phero) { position: relative; overflow: hidden; --wm-y: 0px; --wm-op: 0.1; }
 main > section:not(.hero):not(.phero)::before {
   content: ''; position: absolute; z-index: 0; pointer-events: none;
-  top: 50%; right: -6%;
+  top: 50%; right: 50%;
   width: min(48vw, 560px); aspect-ratio: 1;
-  translate: 0 calc(-50% + var(--wm-y));
+  translate: 50% calc(-50% + var(--wm-y));
   background: center/contain no-repeat url('/assets/logo.webp');
-  opacity: 0.05; filter: grayscale(1) brightness(1.6);
+  opacity: var(--wm-op); filter: grayscale(1) brightness(1.8);
 }
-main > section:not(.hero):not(.phero):not(.book):nth-child(even)::before { right: auto; left: -6%; }
 main > section:not(.hero):not(.phero) > .wrap { position: relative; z-index: 1; }
-/* the closing CTA band keeps its own radial glow; a centred crest suits it.
-   Excluded from the even/odd alternation above (not just overridden) since on
-   several subpages .book lands on an even child and was winning on specificity.
-   The base rule above (main > section...::before) is also MORE specific than
-   this one — it uses the `section` type selector where this uses `.section` as
-   a class, so without !important its right/translate never actually won. */
-main > .section.book::before { right: 50% !important; translate: 50% calc(-50% + var(--wm-y)) !important; opacity: 0.08 !important; }
+/* the closing CTA band gets a brighter crest to anchor the page's final beat */
+main > .section.book { --wm-op: 0.16; }
 @media (prefers-reduced-motion: reduce) { main > section:not(.hero):not(.phero) { --wm-y: 0px !important; } }
 
 .section__head { max-width: 760px; margin-bottom: clamp(1.4rem, 3vw, 2.25rem); }
