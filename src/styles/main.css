@@ -60,12 +60,19 @@ ul { list-style: none; padding: 0; }
 
 .section {
   padding-block: var(--section-y); position: relative;
-  background-color: rgba(10, 10, 10, 0.9);
+  /* Low alpha on purpose: .ambient-field's own fill is the exact same --bg,
+     so this overlay isn't what makes the section dark — it's only there for
+     the faint odd/even hairline tint. At 0.9 alpha it was crushing the fixed
+     crest + embers behind it down to ~1% effective visibility (0.12 opacity
+     crest * (1 - 0.9) overlay), which read as "nothing there" in every
+     section except the ones with no overlay at all (.reviews-section) or a
+     gradient that thins out near its centre (.book). */
+  background-color: rgba(10, 10, 10, 0.3);
   background-image:
     radial-gradient(60% 70% at 85% 0%, rgba(212,175,55,0.10) 0%, rgba(212,175,55,0) 60%),
     radial-gradient(70% 70% at 10% 100%, rgba(212,175,55,0.06) 0%, rgba(10,10,10,0) 55%);
 }
-.section:nth-of-type(even) { background-color: rgba(13, 13, 13, 0.9); }
+.section:nth-of-type(even) { background-color: rgba(13, 13, 13, 0.3); }
 
 /* ------------------------- sitewide ambient field ---------------------------- */
 /* One fixed, full-viewport layer (a single .ambient-field div, first child of
@@ -84,7 +91,7 @@ ul { list-style: none; padding: 0; }
   content: ''; position: absolute; inset: 0; margin: auto;
   width: min(48vw, 560px); aspect-ratio: 1;
   background: center/contain no-repeat url('/assets/logo.webp');
-  opacity: 0.12; filter: grayscale(1) brightness(1.8);
+  opacity: 0.16; filter: grayscale(1) brightness(1.9);
 }
 
 .section__head { max-width: 760px; margin-bottom: clamp(1.4rem, 3vw, 2.25rem); }
@@ -341,7 +348,7 @@ ul { list-style: none; padding: 0; }
 .proof .reel { aspect-ratio: auto; }
 
 /* stats band — sits immediately below the hero */
-.stats-band { padding-block: clamp(1.25rem, 3vw, 2rem); background: rgba(13, 13, 13, 0.9); }
+.stats-band { padding-block: clamp(1.25rem, 3vw, 2rem); background: rgba(13, 13, 13, 0.3); }
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: clamp(1.4rem, 3vw, 2rem); }
 .stats li { text-align: center; }
 .stats__n { display: block; font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--gold); line-height: 1; }
@@ -455,7 +462,7 @@ ul { list-style: none; padding: 0; }
 .location__map-ph { display: grid; place-items: center; height: 100%; color: var(--text-faint); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
 /* --------------------------------- book ---------------------------------- */
-.book { background: radial-gradient(120% 90% at 80% 0%, rgba(212,175,55,0.10), rgba(13, 13, 13, 0.9)); }
+.book { background: radial-gradient(120% 90% at 80% 0%, rgba(212,175,55,0.10), rgba(13, 13, 13, 0.3)); }
 .book__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
 .book__copy .section__lead { margin-bottom: 2rem; }
 .book__form { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(1.6rem, 3vw, 2.4rem); display: grid; gap: 1.1rem; box-shadow: var(--shadow); }

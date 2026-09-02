@@ -103,6 +103,20 @@ export function initVoid(mountSelector = '.hero__void') {
     canvas.classList.remove('is-live')
   }
 
+  // A missed-frame gap (main-thread jank from autoplaying video, layout, GC —
+  // not an actual lost context) used to be treated the same as real context
+  // loss: permanently dead for the rest of the pageview. On a sitewide layer
+  // that's supposed to run for the whole scroll session, that one-way switch
+  // meant a single stall anywhere on the page silently killed the embers for
+  // good. Recoverable stalls just restart the loop instead.
+  const recoverFromStall = () => {
+    revealed = false
+    okFrames = 0
+    canvas.classList.remove('is-live')
+    stop()
+    start()
+  }
+
   const onContextLost = (e) => {
     e.preventDefault()
     restoreFallback()
@@ -195,13 +209,16 @@ export function initVoid(mountSelector = '.hero__void') {
   vis.observe(mount)
   document.addEventListener('visibilitychange', onVisibility)
 
-  // Stall watchdog — context loss doesn't always fire on soft GPU stalls.
+  // Stall watchdog — real context loss doesn't always fire its own event on a
+  // soft GPU stall, so poll for it too. Only genuine context loss (or never
+  // once managing a clean frame) is treated as permanently dead; a stall after
+  // already running fine just restarts the loop — see recoverFromStall above.
   const watchdog = setInterval(() => {
     if (!running || contextLost) return
     if (gl.isContextLost()) { restoreFallback(); return }
     const now = performance.now()
-    if (revealed && okFrames > 0 && now - lastOkAt > 1200) restoreFallback()
-    if (!revealed && running && okFrames === 0 && now - bootAt > 3000) restoreFallback()
+    if (revealed && okFrames > 0 && now - lastOkAt > 1200) { recoverFromStall(); return }
+    if (!revealed && running && okFrames === 0 && now - bootAt > 6000) restoreFallback()
   }, 400)
 
   return () => {

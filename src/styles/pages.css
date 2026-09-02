@@ -17,7 +17,7 @@
     radial-gradient(58% 64% at 78% 40%, rgba(212,175,55,0.20) 0%, rgba(212,175,55,0) 60%),
     radial-gradient(70% 70% at 12% 80%, rgba(212,175,55,0.08) 0%, rgba(10,10,10,0) 55%),
     radial-gradient(120% 120% at 50% 120%, rgba(212,175,55,0.05) 0%, rgba(10,10,10,0) 55%),
-    rgba(10, 10, 10, 0.9);
+    rgba(10, 10, 10, 0.3);
   border-bottom: 1px solid var(--line);
 }
 .phero > .wrap { position: relative; z-index: 1; }
