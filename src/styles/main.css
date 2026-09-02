@@ -91,7 +91,7 @@ ul { list-style: none; padding: 0; }
   content: ''; position: absolute; inset: 0; margin: auto;
   width: min(48vw, 560px); aspect-ratio: 1;
   background: center/contain no-repeat url('/assets/logo.webp');
-  opacity: 0.16; filter: grayscale(1) brightness(1.9);
+  opacity: 0.1; filter: grayscale(1) brightness(1.9);
 }
 
 .section__head { max-width: 760px; margin-bottom: clamp(1.4rem, 3vw, 2.25rem); }
@@ -348,7 +348,7 @@ ul { list-style: none; padding: 0; }
 .proof .reel { aspect-ratio: auto; }
 
 /* stats band — sits immediately below the hero */
-.stats-band { padding-block: clamp(1.25rem, 3vw, 2rem); background: rgba(13, 13, 13, 0.3); }
+.stats-band { padding-block: clamp(1.25rem, 3vw, 2rem); background: var(--bg-2); }
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: clamp(1.4rem, 3vw, 2rem); }
 .stats li { text-align: center; }
 .stats__n { display: block; font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--gold); line-height: 1; }
