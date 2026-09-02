@@ -19,18 +19,18 @@ const PLACEHOLDER_PHOTOS = [
 const AGE_LABEL = { u15: 'Under 15', '15-20': '15–20', '20-30': '20–30', '30plus': '30+' }
 
 const REVIEWS = [
-  { gender: 'male',   age: '20-30', tag: 'Boxing',                 name: 'Arjun R.',  quote: 'The boxing training here completely transformed my fitness. The coaches are friendly, motivating, and truly know their craft.' },
-  { gender: 'female', age: '20-30', tag: 'Muay Thai',               name: 'Priya M.',  quote: 'Top-notch facilities in a convenient Alwarpet location. I came for fitness and stayed for the community.' },
-  { gender: 'male',   age: '30plus', tag: 'Brazilian Jiu-Jitsu',    name: 'Karthik S.', quote: 'ACE has had a massive positive impact on both my mental and physical well-being. More than a gym, a transformation space.' },
-  { gender: 'female', age: '15-20', tag: 'MMA',                     name: 'Divya K.',  quote: "I used to think MMA wasn't for girls my age. Coach never treated me differently, he just pushed me. I've competed twice now." },
-  { gender: 'male',   age: 'u15',   tag: 'Boxing',                  name: 'Rohan T.',  quote: "I was nervous about sparring at first. Coach keeps it safe and fun for my age group, and my footwork's come on so fast." },
-  { gender: 'female', age: 'u15',   tag: 'Muay Thai',               name: 'Meera V.',  quote: "I joined with my brother just to try it. Now I'm the one who doesn't want to miss class." },
-  { gender: 'male',   age: '15-20', tag: 'Strength & Conditioning', name: 'Sanjay P.', quote: 'College trials were coming up and I needed to get stronger fast. Six months here and I made the team.' },
-  { gender: 'male',   age: '20-30', tag: 'MMA',                     name: 'Ishaan R.', quote: 'Trained at three other gyms before this one. The technical detail in the coaching here is on another level.' },
-  { gender: 'female', age: '30plus', tag: 'Boxing',                 name: 'Ananya B.', quote: "Started boxing at 34 thinking I was too old for it. Best decision I've made for my body and my head." },
-  { gender: 'male',   age: '30plus', tag: 'Muay Thai',              name: 'Vikram N.', quote: 'A desk job wrecked my back for years. Training Muay Thai here rebuilt it, and I actually look forward to sessions now.' },
-  { gender: 'female', age: '15-20', tag: 'Brazilian Jiu-Jitsu',     name: 'Sneha K.',  quote: 'BJJ gave me more confidence walking home at night than anything else ever has.' },
-  { gender: 'male',   age: 'u15',   tag: 'MMA',                     name: 'Yusuf A.',  quote: 'My coach focuses on discipline and technique first, not just fighting. My parents like that as much as I do.' },
+  { gender: 'male',   age: '20-30', tag: 'Boxing',                 name: 'Arjun R.',  quote: 'The boxing training here <span class="hl">completely transformed my fitness</span>. The coaches are friendly, motivating, and truly know their craft.' },
+  { gender: 'female', age: '20-30', tag: 'Muay Thai',               name: 'Priya M.',  quote: 'Top-notch facilities in a convenient Alwarpet location. I came for fitness and <span class="hl">stayed for the community</span>.' },
+  { gender: 'male',   age: '30plus', tag: 'Brazilian Jiu-Jitsu',    name: 'Karthik S.', quote: 'ACE has had a <span class="hl">massive positive impact on both my mental and physical well-being</span>. More than a gym, a transformation space.' },
+  { gender: 'female', age: '15-20', tag: 'MMA',                     name: 'Divya K.',  quote: "I used to think MMA wasn't for girls my age. Coach never treated me differently, he just pushed me. <span class=\"hl\">I've competed twice now</span>." },
+  { gender: 'male',   age: 'u15',   tag: 'Boxing',                  name: 'Rohan T.',  quote: "I was nervous about sparring at first. Coach keeps it safe and fun for my age group, and my <span class=\"hl\">footwork's come on so fast</span>." },
+  { gender: 'female', age: 'u15',   tag: 'Muay Thai',               name: 'Meera V.',  quote: "I joined with my brother just to try it. Now I'm the one who <span class=\"hl\">doesn't want to miss class</span>." },
+  { gender: 'male',   age: '15-20', tag: 'Strength & Conditioning', name: 'Sanjay P.', quote: 'College trials were coming up and I needed to get stronger fast. Six months here and <span class="hl">I made the team</span>.' },
+  { gender: 'male',   age: '20-30', tag: 'MMA',                     name: 'Ishaan R.', quote: 'Trained at three other gyms before this one. The technical detail in the coaching here is <span class="hl">on another level</span>.' },
+  { gender: 'female', age: '30plus', tag: 'Boxing',                 name: 'Ananya B.', quote: "Started boxing at 34 thinking I was too old for it. <span class=\"hl\">Best decision I've made</span> for my body and my head." },
+  { gender: 'male',   age: '30plus', tag: 'Muay Thai',              name: 'Vikram N.', quote: 'A desk job wrecked my back for years. Training Muay Thai here <span class="hl">rebuilt it</span>, and I actually look forward to sessions now.' },
+  { gender: 'female', age: '15-20', tag: 'Brazilian Jiu-Jitsu',     name: 'Sneha K.',  quote: 'BJJ gave me <span class="hl">more confidence walking home at night</span> than anything else ever has.' },
+  { gender: 'male',   age: 'u15',   tag: 'MMA',                     name: 'Yusuf A.',  quote: 'My coach focuses on <span class="hl">discipline and technique first</span>, not just fighting. My parents like that as much as I do.' },
 ]
 
 export function initReviewsWall() {
