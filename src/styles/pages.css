@@ -27,6 +27,10 @@
 /* text column: a left-aligned reading measure like the homepage, NOT a narrow
    centred block floating in the middle of the page */
 .phero__inner { max-width: 44rem; }
+/* centred variant: hero copy has no accompanying media/grid, so a centred
+   block reads better than a left-aligned column floating on its own */
+.phero--center { border-bottom: none; text-align: center; }
+.phero--center .phero__inner { margin-inline: auto; }
 .phero__grid {
   display: grid; grid-template-columns: 1.1fr 0.9fr;
   gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center;
