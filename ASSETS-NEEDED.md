@@ -64,7 +64,7 @@ if you have sharper footage.
 | Priority | Section | What the placeholder needs | Target filename | Spec |
 |---|---|---|---|---|
 | P0 | Hero (right) | Wolfpack lifter mid-snatch or clean & jerk on the platform | `wolfpack-hero.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
-| P0 | Coach section | Portrait of **Coach Vignesh** at the barbell | `coach-vignesh.webp` | Portrait 4:5, well-lit |
+| ~~P0~~ | ~~Coach section~~ | ~~Portrait of **Coach Vignesh** at the barbell~~ | `coach-vignesh.webp` | Done |
 
 ---
 
