@@ -9,6 +9,7 @@ import './styles/main.css'
 import './styles/mobile.css'
 import { detectTier } from './lib/tiers.js'
 import { initReviewsWall } from './lib/reviews-wall.js'
+import { initConnect, showToast } from './lib/connect.js'
 import {
   TEL_URL, WHATSAPP_URL, WHATSAPP_MESSAGE, INSTAGRAM_URL,
   MAPS_DIRECTIONS, MAPS_EMBED, AGENCY_URL, BOOKING_URL,
@@ -184,6 +185,7 @@ function initForm() {
         if (!res.ok) throw new Error('bad status')
         form.reset()
         setNote(`Got it, ${data.name.split(' ')[0]}! A coach will reach out to lock in your first class.`, 'is-ok')
+        showToast({ title: `You're booked in, ${data.name.split(' ')[0]}!`, sub: 'A coach will confirm your first class shortly.' })
       } catch {
         setNote('Something went wrong. Please message us on WhatsApp and we\'ll sort it.', 'is-err')
       }
@@ -195,6 +197,7 @@ function initForm() {
       const msg = `${WHATSAPP_MESSAGE}\n\nName: ${data.name}\nPhone: ${data.phone}\nTrain: ${data.goal}\nTime: ${data.time}`
       window.open(`https://wa.me/${PHONE_E164}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener')
       setNote('Opening WhatsApp to finish your booking…', 'is-ok')
+      showToast({ title: `Nice one, ${data.name.split(' ')[0]}!`, sub: 'Finish up in WhatsApp and your class is locked in.' })
       return
     }
 
@@ -219,6 +222,7 @@ function initStickyCta() {
 
 /* ---------------------------------- boot ----------------------------------- */
 wireLinks()
+initConnect()
 initNav()
 initReveal()
 initMap()

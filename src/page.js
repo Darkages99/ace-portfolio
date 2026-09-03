@@ -17,6 +17,7 @@ import './styles/pages.css'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { detectTier } from './lib/tiers.js'
+import { initConnect, showToast } from './lib/connect.js'
 import {
   TEL_URL, WHATSAPP_URL, WHATSAPP_MESSAGE, INSTAGRAM_URL,
   MAPS_DIRECTIONS, MAPS_EMBED, AGENCY_URL, BOOKING_URL,
@@ -260,6 +261,7 @@ function initForm() {
         if (!res.ok) throw new Error('bad status')
         form.reset()
         setNote(`Got it, ${data.name.split(' ')[0]}! We'll ring you within a few minutes to lock in your trial.`, 'is-ok')
+        showToast({ title: `You're booked in, ${data.name.split(' ')[0]}!`, sub: "We'll ring you shortly to lock in your trial." })
       } catch {
         setNote('Something went wrong. Please message us on WhatsApp and we\'ll sort it.', 'is-err')
       }
@@ -270,6 +272,7 @@ function initForm() {
       const msg = `${WHATSAPP_MESSAGE}\n\nName: ${data.name}\nPhone: ${data.phone}\nPreferred time: ${data.time || '—'}`
       window.open(`https://wa.me/${PHONE_E164}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener')
       setNote('Opening WhatsApp to finish your booking…', 'is-ok')
+      showToast({ title: `Nice one, ${data.name.split(' ')[0]}!`, sub: 'Finish up in WhatsApp and your trial is locked in.' })
       return
     }
 
@@ -300,6 +303,7 @@ function initAmbientVoid() {
 
 /* ---------------------------------- boot ----------------------------------- */
 wireLinks()
+initConnect()
 initNav()
 initSlots()
 initCarousels()
