@@ -544,9 +544,11 @@ body.no-scroll { overflow: hidden; }
 }
 .chooser__opt:hover { transform: translateY(-2px); }
 .chooser__opt--gold:hover { border-color: var(--gold); box-shadow: var(--glow-gold); }
+.chooser__opt--phone:hover { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(212,175,55,0.3); }
 .chooser__opt--wa:hover { border-color: #25d366; box-shadow: 0 0 0 1px rgba(37,211,102,0.5), 0 10px 40px -12px rgba(37,211,102,0.4); }
 .chooser__ico { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; }
 .chooser__opt--gold .chooser__ico { background: rgba(212,175,55,0.14); color: var(--gold); }
+.chooser__opt--phone .chooser__ico { background: rgba(212,175,55,0.09); color: var(--gold-ember); }
 .chooser__opt--wa .chooser__ico { background: rgba(37,211,102,0.14); color: #25d366; }
 .chooser__txt { display: grid; gap: 0.15rem; flex: 1; }
 .chooser__txt b { font-size: 1.02rem; }

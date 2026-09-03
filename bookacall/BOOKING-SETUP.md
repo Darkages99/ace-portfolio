@@ -73,6 +73,21 @@ and two people can't grab the same time.
   those rows (select the row numbers ▸ right-click ▸ Delete rows). Leaving them
   just marks those slots as taken.
 
+## Trial-class bookings (/book-trial)
+
+The `/book-trial` page uses this **same** script and spreadsheet — no extra setup.
+Trial bookings land in their own tab called **Trials** (created automatically on the
+first trial booking), so calls and trial classes stay neatly separated in one sheet.
+
+- Trials join scheduled **group classes**, so a session is never "full" here and two
+  people booking the same class is expected — every booking is just recorded.
+- The class times offered are fixed daily starts (morning + evening). To change them,
+  edit the `TRIAL_SESSIONS` list in **both** `src/book-trial.js` and `bookacall/Code.gs`
+  (keep them identical), then republish the script (see below).
+- Because `Code.gs` changed to add trials, if your script was deployed before this,
+  you must publish a new version: **Deploy ▸ Manage deployments ▸ (edit) ▸ Version:
+  New version ▸ Deploy**. The `/exec` URL stays the same.
+
 ## Phase 2 (later) — SMS reminders
 
 The sheet already captures name, phone, date and time — everything a reminder needs.

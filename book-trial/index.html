@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <script>document.documentElement.classList.add('js')</script>
+
+    <title>Book a Trial Class — MMA, Boxing &amp; Muay Thai in Alwarpet | Ancient Combat Evolution</title>
+    <meta name="description" content="Pick a day and a class time and lock in your free trial at Ancient Combat Evolution, Alwarpet. A genuine coached session, wraps provided, no experience needed. All times in IST." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://ancientcombatevolution.in/book-trial/" />
+    <link rel="icon" type="image/png" sizes="any" href="/assets/favicon.png" />
+    <link rel="apple-touch-icon" href="/assets/favicon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ancient Combat Evolution" />
+    <meta property="og:title" content="Book a Trial Class — ACE, Alwarpet" />
+    <meta property="og:description" content="Pick a day and a class time and lock in your free trial. Wraps provided, no experience needed." />
+    <meta property="og:image" content="/assets/hero-spar.webp" />
+    <meta property="og:url" content="https://ancientcombatevolution.in/book-trial/" />
+    <meta property="og:locale" content="en_IN" />
+
+    <script type="module" src="/src/book-trial.js"></script>
+  </head>
+
+  <body>
+    <div class="ambient-field" aria-hidden="true"></div>
+    <a class="skip-link" href="#cal">Skip to the trial scheduler</a>
+
+    <header class="nav" id="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" href="/" aria-label="Ancient Combat Evolution, home">
+          <img src="/assets/logo.webp" alt="" width="40" height="40" class="nav__logo" />
+          <span class="nav__brandtext">Ancient Combat<strong> Evolution</strong></span>
+        </a>
+        <nav class="nav__links" id="navlinks" aria-label="Primary">
+          <a href="/#programs">Disciplines</a>
+          <a href="/beginners/">Beginners</a>
+          <a href="/pricing/">Fees</a>
+          <a href="/weightlifting/">Weightlifting</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+        <a href="/book-trial/" class="btn btn--gold nav__cta" aria-current="page">Free Trial</a>
+        <button class="nav__toggle" id="navtoggle" aria-expanded="false" aria-controls="navlinks" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============================ HERO ============================ -->
+      <section class="phero">
+        <div class="wrap">
+          <div class="phero__inner" style="max-width:52rem">
+            <p class="crumbs"><a href="/">Home</a><span>/</span>Book a trial class</p>
+            <p class="eyebrow">Your first session is free</p>
+            <h1 class="phero__title">Book a <span class="g">trial class.</span></h1>
+            <p class="phero__lead">
+              Pick a day and a class time that suits you and <span class="hl">we'll save your spot on the mats.</span>
+              A genuine coached session, scaled to exactly where you are, <span class="hl">wraps provided, no
+              experience needed.</span> All times shown in <span class="hl">IST.</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ SCHEDULER ============================ -->
+      <section class="section book callbook">
+        <div class="wrap callbook__wrap">
+          <header class="section__head reveal" style="text-align:center;margin-inline:auto">
+            <p class="eyebrow">Choose your session</p>
+            <h2 class="section__title">Pick a day <span class="g">and a class.</span></h2>
+            <p class="section__lead" style="margin-inline:auto">Trials run inside our regular coached sessions, morning and evening, so you get the real floor. All times shown in <span class="hl">IST.</span></p>
+          </header>
+
+          <div class="cal" id="cal" aria-live="polite">
+            <div class="cal__weekbar">
+              <button class="cal__nav" id="calPrev" type="button" aria-label="Previous week">&lsaquo;</button>
+              <p class="cal__month" id="calRange">&nbsp;</p>
+              <button class="cal__nav" id="calNext" type="button" aria-label="Next week">&rsaquo;</button>
+            </div>
+            <div class="cal__days" id="calDays" role="tablist" aria-label="Choose a day"></div>
+            <div class="cal__slots" id="calSlots" aria-label="Choose a class time">
+              <p class="cslots__empty">Pick a day above to see available class times.</p>
+            </div>
+          </div>
+
+          <form class="callform" id="callform" hidden novalidate>
+            <div class="callform__slot">
+              <span class="lbl">Your trial</span>
+              <span id="callSlot">—</span>
+            </div>
+            <div class="field">
+              <label for="c-name">Name</label>
+              <input id="c-name" name="name" type="text" autocomplete="name" required placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="c-phone">Phone / WhatsApp</label>
+              <input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+91…" />
+            </div>
+            <div class="field">
+              <label for="c-goal">What do you want to train?</label>
+              <select id="c-goal" name="goal">
+                <option value="Not sure yet">Not sure yet, recommend for me</option>
+                <option value="Boxing">Boxing</option>
+                <option value="Muay Thai">Muay Thai</option>
+                <option value="Brazilian Jiu-Jitsu">Brazilian Jiu-Jitsu</option>
+                <option value="MMA">MMA</option>
+                <option value="Strength &amp; Conditioning">Strength &amp; Conditioning</option>
+                <option value="Weightlifting">Weightlifting</option>
+              </select>
+            </div>
+            <button type="submit" id="callSubmit" class="btn btn--gold btn--lg callform__submit">Book My Trial Class</button>
+            <p class="callnote" id="callnote" role="status" aria-live="polite"></p>
+            <p class="note-line" style="margin-top:0">We'll never share your number. One message to confirm, that's it.</p>
+          </form>
+
+          <div class="calldone" id="callDone" hidden>
+            <div class="calldone__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h2>You're <span class="g">booked in.</span></h2>
+            <p class="calldone__slot" id="callDoneSlot">—</p>
+            <p>We've saved your spot. A coach will send a quick WhatsApp to confirm, then all you do is turn up. Wraps and gear are on us. See you on the mats.</p>
+          </div>
+
+          <!-- What to know, mirrors the free-trial practicals -->
+          <div class="bring-grid reveal" style="margin-top:clamp(2rem,5vw,3.5rem)">
+            <article class="bring"><div class="bring__icon">👕</div><h3>What to wear</h3><p><span class="hl">Comfortable workout clothes</span> you can move and sweat in. A t-shirt and shorts or track pants are perfect.</p></article>
+            <article class="bring"><div class="bring__icon">💧</div><h3>What to bring</h3><p>A <span class="hl">water bottle and a towel.</span> We provide wraps and all the gear for your first session.</p></article>
+            <article class="bring"><div class="bring__icon">🅿️</div><h3>Where to park</h3><p>There's <span class="hl">parking right by the gym</span> on Ashoka Street. Tell us if you're on a two-wheeler or in a car and we'll guide you in.</p></article>
+          </div>
+          <p class="note-line reveal">
+            Prefer to talk it through first? <a href="/bookacall/" class="hl">Book a 15-minute call</a> and a coach will ring you.
+            New to combat sport? <a href="/beginners/" class="hl">Read the beginners' guide.</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__grid">
+        <div class="footer__brand">
+          <img src="/assets/logo.webp" alt="Ancient Combat Evolution" width="56" height="56" />
+          <p>Alwarpet's <span class="hl">underground combat-sports arena.</span> <span class="hl">Discipline in. Evolution out.</span></p>
+        </div>
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="/">Home</a>
+          <a href="/beginners/">Beginners</a>
+          <a href="/pricing/">Fees</a>
+          <a href="/book-trial/">Free Trial</a>
+          <a href="/weightlifting/">Weightlifting</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+        <div class="footer__contact">
+          <a class="js-instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+          <a class="js-tel" href="#">Call</a>
+          <a class="js-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <div class="wrap footer__base">
+        <p>© <span id="year">2026</span> Ancient Combat Evolution · Alwarpet, Chennai</p>
+      </div>
+    </footer>
+
+    <a class="fab js-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.737-.981a9.86 9.86 0 002.741.274z"/></svg>
+    </a>
+  </body>
+</html>

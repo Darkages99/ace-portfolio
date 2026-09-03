@@ -28,6 +28,15 @@ var HEADERS = ['Booked at (IST)', 'Date', 'Time (IST)', 'Name', 'Phone', 'Lookin
 // Column positions (1-indexed) that must stay plain text so Sheets can't retype them.
 var TEXT_COLS = [2, 3, 8]; // Date, Time, Key
 
+// ---- trial classes (type:'trial') — same spreadsheet, its own tab ----------
+// Trials join scheduled GROUP classes, so a session holds many people: no
+// double-book collision, slots never "sell out". These are the fixed daily
+// class start-times (IST minutes from midnight); keep identical to the
+// TRIAL_SESSIONS list in src/book-trial.js.
+var TRIAL_SHEET_NAME = 'Trials';
+var TRIAL_HEADERS = ['Booked at (IST)', 'Date', 'Class time (IST)', 'Name', 'Phone', 'Looking to train', 'Status', 'Key'];
+var TRIAL_SESSIONS = [6 * 60, 7 * 60 + 30, 17 * 60 + 30, 19 * 60, 20 * 60 + 30];
+
 // ---- HTTP entry points -----------------------------------------------------
 
 function doGet(e) {
@@ -59,6 +68,8 @@ function doPost(e) {
 // ---- core ------------------------------------------------------------------
 
 function createBooking(b) {
+  if (String((b && b.type) || '').toLowerCase() === 'trial') return createTrial(b);
+
   var date = String(b.date || '').trim();
   var time = String(b.time || '').trim();
   var name = String(b.name || '').trim();
@@ -79,6 +90,32 @@ function createBooking(b) {
     var sheet = getSheet();
     if (keyExists(sheet, key)) return { ok: false, error: 'taken' };
     sheet.appendRow([nowIST(), date, time, name, phone, goal, 'Booked', key]);
+    SpreadsheetApp.flush();
+    return { ok: true };
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+// A trial books a spot in a scheduled group class: no collision (many people
+// per session), we just record the row in the Trials tab of the same sheet.
+function createTrial(b) {
+  var date = String(b.date || '').trim();
+  var time = String(b.time || '').trim();
+  var name = String(b.name || '').trim();
+  var phone = String(b.phone || '').trim();
+  var goal = String(b.goal || '').trim();
+
+  if (!name || !phone) return { ok: false, error: 'missing_contact' };
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) return { ok: false, error: 'bad_slot' };
+  if (!isValidSession(time)) return { ok: false, error: 'bad_slot' };
+  if (isPast(date, time)) return { ok: false, error: 'past' };
+
+  var key = date + ' ' + time;
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    getTrialSheet().appendRow([nowIST(), date, time, name, phone, goal, 'Booked', key]);
     SpreadsheetApp.flush();
     return { ok: true };
   } finally {
@@ -130,6 +167,23 @@ function getSheet() {
   return sheet;
 }
 
+// The Trials tab — same spreadsheet, created on first booking. Date/time/key
+// forced to plain text for the same reason as the Bookings tab.
+function getTrialSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(TRIAL_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(TRIAL_SHEET_NAME);
+    sheet.appendRow(TRIAL_HEADERS);
+    sheet.getRange(1, 1, 1, TRIAL_HEADERS.length).setFontWeight('bold');
+    sheet.setFrozenRows(1);
+  }
+  for (var c = 0; c < TEXT_COLS.length; c++) {
+    sheet.getRange(1, TEXT_COLS[c], sheet.getMaxRows(), 1).setNumberFormat('@');
+  }
+  return sheet;
+}
+
 // Returns the data rows (below the header) as arrays covering columns B..H:
 // [0]Date [1]Time [2]Name [3]Phone [4]Train [5]Status [6]Key
 function dataRows(sheet) {
@@ -158,6 +212,14 @@ function isValidSlot(time) {
   var mins = toMinutes(time);
   for (var m = WINDOW_START; m + CALL_LEN <= WINDOW_END; m += STEP) {
     if (m === mins) return true;
+  }
+  return false;
+}
+
+function isValidSession(time) {
+  var mins = toMinutes(time);
+  for (var i = 0; i < TRIAL_SESSIONS.length; i++) {
+    if (TRIAL_SESSIONS[i] === mins) return true;
   }
   return false;
 }

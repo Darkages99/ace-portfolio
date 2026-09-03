@@ -2,15 +2,18 @@
 //  ACE — "how do you want to start?" chooser + a Swiggy-style success toast.
 //  Shared by the homepage (main.js) and the content subpages (page.js).
 //
-//  The chooser gives every WhatsApp call-to-action a fork: book a call on the
-//  /bookacall scheduler, or chat on WhatsApp. Any element with `.js-connect`
-//  opens it (its href is kept as the no-JS fallback). The green round FAB and
-//  footer text links stay pure WhatsApp on purpose — quick one-tap access.
+//  The chooser gives every call-to-action a three-way fork, in order: book a
+//  trial class on the /book-trial scheduler, book a call on /bookacall, or chat
+//  on WhatsApp. Any element with `.js-connect` opens it (its href is kept as the
+//  no-JS fallback). The green round FAB and footer text links stay pure WhatsApp
+//  on purpose — quick one-tap access.
 // ---------------------------------------------------------------------------
 
 import { WHATSAPP_URL } from '../data/config.js'
 
+const BOOKTRIAL_URL = '/book-trial/'
 const BOOKACALL_URL = '/bookacall/'
+const TRIAL_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5h7a4 4 0 0 1 4 4v.5a2.5 2.5 0 0 1-2.5 2.5H13l-1.2 1.2a2 2 0 0 1-1.4.6H8a3.5 3.5 0 0 1-3.5-3.5v-1A4.3 4.3 0 0 1 6.5 6.5Z"/><path d="M4.5 13.5v3a1.5 1.5 0 0 0 1.5 1.5h1.5"/></svg>'
 const WA_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.737-.981a9.86 9.86 0 002.741.274z"/></svg>'
 const PHONE_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>'
 
@@ -30,14 +33,19 @@ function buildDialog() {
       <button class="chooser__x" type="button" data-close aria-label="Close">&times;</button>
       <p class="chooser__eyebrow">Get started</p>
       <h2 class="chooser__title" id="chooser-title">How do you want to <span class="g">start?</span></h2>
-      <a class="chooser__opt chooser__opt--gold" href="${BOOKACALL_URL}">
+      <a class="chooser__opt chooser__opt--gold" href="${BOOKTRIAL_URL}">
+        <span class="chooser__ico">${TRIAL_SVG}</span>
+        <span class="chooser__txt"><b>Book a trial class</b><small>Pick a day and a session, free</small></span>
+        <span class="chooser__arrow" aria-hidden="true">&rsaquo;</span>
+      </a>
+      <a class="chooser__opt chooser__opt--phone" href="${BOOKACALL_URL}">
         <span class="chooser__ico">${PHONE_SVG}</span>
         <span class="chooser__txt"><b>Book a call</b><small>Pick a time, a coach rings you</small></span>
         <span class="chooser__arrow" aria-hidden="true">&rsaquo;</span>
       </a>
       <a class="chooser__opt chooser__opt--wa" href="${WHATSAPP_URL}" target="_blank" rel="noopener">
         <span class="chooser__ico">${WA_SVG}</span>
-        <span class="chooser__txt"><b>Chat on WhatsApp</b><small>Message a coach right now</small></span>
+        <span class="chooser__txt"><b>Text us on WhatsApp</b><small>Message a coach right now</small></span>
         <span class="chooser__arrow" aria-hidden="true">&rsaquo;</span>
       </a>
     </div>`
