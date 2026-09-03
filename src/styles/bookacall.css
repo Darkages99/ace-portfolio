@@ -1,0 +1,132 @@
+/* ===========================================================================
+   ACE — /bookacall call scheduler widget. Extends tokens.css + main.css +
+   pages.css. Same Underground-Luxury system: matte black, championship gold,
+   sharp geometry.
+   =========================================================================== */
+
+.callbook__wrap { max-width: 860px; margin-inline: auto; }
+
+/* The scheduler shell */
+.cal {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: clamp(1.1rem, 3vw, 2rem);
+}
+
+/* week bar: ‹  Sep 3 – 9  › */
+.cal__weekbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; margin-bottom: 1.25rem;
+}
+.cal__month {
+  font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
+  letter-spacing: 0.04em; font-size: clamp(1.1rem, 2.4vw, 1.5rem); color: var(--text);
+}
+.cal__nav {
+  flex: none; width: 44px; height: 44px; border-radius: var(--radius);
+  background: #0e0e0e; border: 1px solid var(--line);
+  color: var(--gold); font-size: 1.4rem; line-height: 1;
+  display: grid; place-items: center;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.cal__nav:hover:not(:disabled) { border-color: var(--gold); background: var(--surface-2); transform: translateY(-2px); }
+.cal__nav:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* the 7-day strip */
+.cal__days {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem;
+  margin-bottom: 1.4rem;
+}
+.cday {
+  display: grid; gap: 0.15rem; justify-items: center; align-content: center;
+  padding: 0.7rem 0.25rem; border-radius: var(--radius);
+  background: #0e0e0e; border: 1px solid var(--line-soft); color: var(--text-dim);
+  transition: border-color 0.18s var(--ease), background 0.18s var(--ease), color 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.cday:hover { border-color: var(--gold); color: var(--text); transform: translateY(-2px); }
+.cday__dow { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-faint); }
+.cday__num { font-family: var(--font-display); font-size: 1.5rem; line-height: 1; }
+.cday__mon { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); }
+.cday.is-today { border-color: var(--line); }
+.cday.is-today .cday__dow { color: var(--gold); }
+.cday.is-active {
+  background: linear-gradient(160deg, rgba(212,175,55,0.16), var(--surface-2));
+  border-color: var(--gold); color: var(--text);
+  box-shadow: var(--glow-gold);
+}
+.cday.is-active .cday__dow, .cday.is-active .cday__mon { color: var(--gold-ember); }
+
+/* time-slot grid */
+.cal__slots {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 0.5rem;
+}
+.cslot {
+  padding: 0.7rem 0.5rem; border-radius: var(--radius);
+  background: #0e0e0e; border: 1px solid var(--line-soft); color: var(--text);
+  font-size: 0.92rem; font-weight: 600; letter-spacing: 0.02em;
+  transition: border-color 0.16s var(--ease), background 0.16s var(--ease), color 0.16s var(--ease), transform 0.16s var(--ease);
+}
+.cslot:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-ember); transform: translateY(-2px); }
+.cslot.is-active {
+  background: var(--gold); border-color: var(--gold); color: #111;
+  box-shadow: var(--glow-gold);
+}
+.cslot.is-taken {
+  opacity: 0.32; text-decoration: line-through; cursor: not-allowed;
+  color: var(--text-faint);
+}
+.cslots__empty { grid-column: 1 / -1; color: var(--text-faint); font-size: 0.95rem; padding: 0.5rem 0; }
+
+/* the details form, revealed once a slot is chosen */
+.callform {
+  margin-top: clamp(1.5rem, 4vw, 2.25rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  display: grid; gap: 1.1rem;
+}
+.callform__slot {
+  display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--line-soft);
+}
+.callform__slot .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-faint); }
+.callform__slot #callSlot {
+  font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.02em;
+  font-size: clamp(1.15rem, 2.6vw, 1.5rem); color: var(--gold);
+}
+.callform__submit { margin-top: 0.4rem; width: 100%; }
+.callnote { font-size: 0.85rem; min-height: 1.2em; }
+.callnote.is-ok { color: var(--gold); }
+.callnote.is-err { color: var(--danger); }
+
+/* success state */
+.calldone {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem); text-align: center;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(212,175,55,0.14), var(--surface));
+  border: 1px solid var(--gold); border-radius: var(--radius-lg);
+  box-shadow: var(--glow-gold); padding: clamp(2rem, 5vw, 3rem);
+}
+.calldone__mark {
+  width: 60px; height: 60px; margin: 0 auto 1.2rem; border-radius: 50%;
+  display: grid; place-items: center; background: var(--gold); color: #111;
+}
+.calldone h2 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: var(--fs-h3); }
+.calldone__slot {
+  margin-top: 0.6rem; font-family: var(--font-display); text-transform: uppercase;
+  color: var(--gold); font-size: clamp(1.2rem, 3vw, 1.7rem);
+}
+.calldone p { margin-top: 1rem; color: var(--text-dim); max-width: 46ch; margin-inline: auto; }
+
+@media (max-width: 560px) {
+  .cal__days { gap: 0.3rem; }
+  .cday { padding: 0.55rem 0.15rem; }
+  .cday__num { font-size: 1.2rem; }
+  .cday__mon { display: none; }
+  .cal__slots { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+}

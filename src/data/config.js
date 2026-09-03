@@ -21,6 +21,12 @@ export const BOOKING_URL = null
 // a pre-filled WhatsApp message so leads are never lost.
 export const FORM_ENDPOINT = null
 
+// PLACEHOLDER — the /bookacall call-scheduler backend (a Google Apps Script Web
+// App "/exec" URL). See bookacall/BOOKING-SETUP.md. null → the call page runs in
+// demo mode: slots are pickable but a booking just hands off to WhatsApp with the
+// chosen time pre-filled, so no lead is lost before the sheet is wired up.
+export const BOOKING_API_URL = null
+
 // Real — observed on the gym's reels.
 export const INSTAGRAM_URL = 'https://www.instagram.com/ancient_combat_evolution/'
 
