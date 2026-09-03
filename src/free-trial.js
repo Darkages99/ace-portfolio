@@ -1,9 +1,10 @@
 // ---------------------------------------------------------------------------
-//  ACE — /book-trial trial-class scheduler.
+//  ACE — /free-trial trial-class scheduler (calendar on top, info below).
 //
-//  Mirrors the /bookacall call scheduler exactly (same shared subpage shell via
-//  ./page.js, same Underground-Luxury widget, same rolling 7-day strip) but books
-//  a spot in a real coached session instead of a 15-minute callback.
+//  Reuses the whole shared subpage shell (nav, motion, ambient ember field,
+//  config-driven links, footer year) by importing ./page.js, then mounts the
+//  booking widget on top of the page. Same Underground-Luxury design system and
+//  the same widget as /bookacall, so the two calendars look identical.
 //
 //  Unlike calls, trials join scheduled GROUP classes, so:
 //    - the times shown are fixed daily class start-times (morning + evening),

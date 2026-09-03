@@ -19,7 +19,6 @@ export default defineConfig({
         contact: resolve(__dirname, 'contact/index.html'),
         weightlifting: resolve(__dirname, 'weightlifting/index.html'),
         bookacall: resolve(__dirname, 'bookacall/index.html'),
-        bookTrial: resolve(__dirname, 'book-trial/index.html'),
       },
       output: {
         // Keep the heavy libs in their own chunks so they stay out of the

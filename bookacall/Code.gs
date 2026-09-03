@@ -32,7 +32,7 @@ var TEXT_COLS = [2, 3, 8]; // Date, Time, Key
 // Trials join scheduled GROUP classes, so a session holds many people: no
 // double-book collision, slots never "sell out". These are the fixed daily
 // class start-times (IST minutes from midnight); keep identical to the
-// TRIAL_SESSIONS list in src/book-trial.js.
+// TRIAL_SESSIONS list in src/free-trial.js.
 var TRIAL_SHEET_NAME = 'Trials';
 var TRIAL_HEADERS = ['Booked at (IST)', 'Date', 'Class time (IST)', 'Name', 'Phone', 'Looking to train', 'Status', 'Key'];
 var TRIAL_SESSIONS = [6 * 60, 7 * 60 + 30, 17 * 60 + 30, 19 * 60, 20 * 60 + 30];

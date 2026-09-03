@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/book-trial", "destination": "/free-trial/", "permanent": true },
+    { "source": "/book-trial/", "destination": "/free-trial/", "permanent": true }
+  ]
+}
