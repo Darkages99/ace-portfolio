@@ -58,6 +58,8 @@
   box-shadow: var(--glow-gold);
 }
 .cday.is-active .cday__dow, .cday.is-active .cday__mon { color: var(--gold-ember); }
+.cday.is-closed { opacity: 0.35; cursor: not-allowed; }
+.cday.is-closed:hover { border-color: var(--line-soft); color: var(--text-dim); transform: none; }
 
 /* time-slot grid */
 .cal__slots {

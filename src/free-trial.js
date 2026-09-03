@@ -126,17 +126,24 @@ function initWidget() {
     for (let i = 0; i < DAYS_PER_PAGE; i++) {
       const dt = dayFromIndex(page * DAYS_PER_PAGE + i)
       const ds = dateStrOf(dt)
+      const dow = dt.getUTCDay()
+      const closed = dow === 0 || dow === 6 // gym runs Mon–Fri only
       const b = document.createElement('button')
       b.type = 'button'
-      b.className = 'cday'
+      b.className = 'cday' + (closed ? ' is-closed' : '')
       b.setAttribute('role', 'tab')
       b.dataset.date = ds
-      b.innerHTML = `<span class="cday__dow">${WEEKDAY[dt.getUTCDay()]}</span>` +
+      b.innerHTML = `<span class="cday__dow">${WEEKDAY[dow]}</span>` +
         `<span class="cday__num">${dt.getUTCDate()}</span>` +
-        `<span class="cday__mon">${MONTH[dt.getUTCMonth()]}</span>`
+        `<span class="cday__mon">${closed ? 'Closed' : MONTH[dt.getUTCMonth()]}</span>`
       if (ds === now.dateStr) b.classList.add('is-today')
       if (ds === selectedDate) b.classList.add('is-active')
-      b.addEventListener('click', () => selectDay(ds, b))
+      if (closed) {
+        b.disabled = true
+        b.setAttribute('aria-label', `${WEEKDAY[dow]} — closed`)
+      } else {
+        b.addEventListener('click', () => selectDay(ds, b))
+      }
       daysEl.appendChild(b)
     }
 
