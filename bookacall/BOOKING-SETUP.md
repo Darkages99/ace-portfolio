@@ -69,6 +69,9 @@ and two people can't grab the same time.
   Manage deployments ▸ (edit) ▸ Version: New version ▸ Deploy**. Editing the code
   alone doesn't update the live URL — you must publish a new version. The `/exec`
   URL stays the same, so you don't need to touch the site again.
+- **Clearing test data:** if you ran any test bookings, open the sheet and delete
+  those rows (select the row numbers ▸ right-click ▸ Delete rows). Leaving them
+  just marks those slots as taken.
 
 ## Phase 2 (later) — SMS reminders
 

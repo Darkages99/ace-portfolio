@@ -25,7 +25,8 @@ export const FORM_ENDPOINT = null
 // App "/exec" URL). See bookacall/BOOKING-SETUP.md. null → the call page runs in
 // demo mode: slots are pickable but a booking just hands off to WhatsApp with the
 // chosen time pre-filled, so no lead is lost before the sheet is wired up.
-export const BOOKING_API_URL = null
+export const BOOKING_API_URL =
+  'https://script.google.com/macros/s/AKfycbwvD1-DeOUXVuSLoemKDjfUhhRidwBgqk-UDQiVL7yT8qMeOYQoJ4LD3bT34ELeCePS6g/exec'
 
 // Real — observed on the gym's reels.
 export const INSTAGRAM_URL = 'https://www.instagram.com/ancient_combat_evolution/'
