@@ -1,8 +1,13 @@
 # Ancient Combat Evolution — Assets Needed
 
-Every image/video slot on the site currently shows a **clearly-marked placeholder box**
-(gold-hatched, labelled "Placeholder · video/photo"). This file lists exactly what real
-asset each placeholder expects, where it lives, and the spec to shoot/export it at.
+Every video slot on the site now plays a **stand-in clip** pulled from footage already on
+hand (raw ACE session footage + Wolfpack Weightlifting's own reels), so the site feels alive
+instead of showing empty gray/gold-hatched boxes while we wait on final production. None of
+these are final — swap the file at the same path once the real shoot is in. Testimonial
+member-portrait slots are untouched and still show a **clearly-marked placeholder box**
+(gold-hatched, labelled "Placeholder · photo") since those need a real, consented headshot,
+not b-roll. This file lists exactly what real asset each slot expects, where it lives, and
+the spec to shoot/export it at.
 
 Drop finished files into `public/assets/` using the **target filename** below, then replace
 the placeholder markup on the page with the matching `<video>`/`<img>` tag (ask me and I'll
@@ -33,47 +38,51 @@ if you have sharper footage.
 ---
 
 ## Fees (`/pricing/`)
-| Priority | Section | What the placeholder needs | Target filename | Spec |
-|---|---|---|---|---|
-| P0 | Hero (right) | Live sparring / pad work on the ACE floor | `pricing-hero.mp4` + `.webp` poster | Vertical 9:16, 6–8s, muted, seamless |
-| P1 | "What you get" feature | A coached group of 8 mid-session, coach correcting form | `groups-of-8.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
-| P0 | Testimonials ×3 | Real member portrait **+ real name + which plan + written consent + quote** | `member-fees-1.webp`, `-2`, `-3` | Portrait 4:5. Replace the placeholder quotes too |
+| Priority | Section | What the slot needs | Current stand-in | Target filename | Spec |
+|---|---|---|---|---|---|
+| P0 | Hero (right) | Live sparring / pad work on the ACE floor | `hero-spar.mp4` (homepage reel, reused) | `pricing-hero.mp4` + `.webp` poster | Vertical 9:16, 6–8s, muted, seamless |
+| P1 | "What you get" feature | A coached group of 8 mid-session, coach correcting form | `group-class.mp4` (homepage reel, reused) | `groups-of-8.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
+| P0 | Testimonials ×3 | Real member portrait **+ real name + which plan + written consent + quote** | still a gold-hatched placeholder | `member-fees-1.webp`, `-2`, `-3` | Portrait 4:5. Replace the placeholder quotes too |
 
 ## Beginners (`/beginners/`)
-| Priority | Section | What the placeholder needs | Target filename | Spec |
-|---|---|---|---|---|
-| P0 | Hero (right) | A real beginner class warming up — friendly, un-intimidating | `beginners-hero.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
-| P1 | Winding timeline — node 1 (0–5 min) | A coach greeting a nervous first-timer, wrapping their hands | `session-welcome.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
-| P1 | Winding timeline — node 2 (5–15 min) | Skipping and footwork warm-up, relaxed pace | `session-footwork.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
-| P1 | Winding timeline — node 3 (15–35 min) | Technique drilled slow: a jab or guard on the pads | `session-technique.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
-| P1 | Winding timeline — node 4 (35–50 min) | A beginner landing clean rounds on the heavy bag | `session-bag.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
-| P1 | Winding timeline — node 5 (50–60 min) | Cool-down stretch + coach talking through next steps | `session-cooldown.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
-| P0 | Testimonials carousel ×6 | Real **beginner** member portrait + name + consent + quote | `member-beg-1.webp` … `-6` | Portrait 4:5. First-timer / over-40 / desk-job / Fight-Camp / returner stories (carousel shows 3 at a time) |
+| Priority | Section | What the slot needs | Current stand-in | Target filename | Spec |
+|---|---|---|---|---|---|
+| P0 | Hero (right) | A real beginner class warming up — friendly, un-intimidating | `beginners-hero.mp4` (raw "Training 3" footage, high-knees warm-up) | `beginners-hero.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
+| P1 | Winding timeline — node 1 (0–5 min) | A coach greeting a nervous first-timer, wrapping their hands | `ceremony.mp4` (homepage reel, reused — 1:1 coach spotting a member, closest available to hands-on welcome) | `session-welcome.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P1 | Winding timeline — node 2 (5–15 min) | Skipping and footwork warm-up, relaxed pace | `skip.mp4` (homepage reel, reused — exact match) | `session-footwork.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P1 | Winding timeline — node 3 (15–35 min) | Technique drilled slow: a jab or guard on the pads | `boxing.mp4` (homepage reel, reused — exact match) | `session-technique.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P1 | Winding timeline — node 4 (35–50 min) | A beginner landing clean rounds on the heavy bag | `bag-power.mp4` (homepage reel, reused — exact match) | `session-bag.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P1 | Winding timeline — node 5 (50–60 min) | Cool-down stretch + coach talking through next steps | `conditioning.mp4` (homepage reel, reused — closest available, not a real cooldown) | `session-cooldown.mp4` + `.webp` | Landscape 4:3, 6–8s, muted |
+| P0 | Testimonials carousel ×6 | Real **beginner** member portrait + name + consent + quote | still a gold-hatched placeholder | `member-beg-1.webp` … `-6` | Portrait 4:5. First-timer / over-40 / desk-job / Fight-Camp / returner stories (carousel shows 3 at a time) |
 
 ## Free Trial (`/free-trial/`)
-| Priority | Section | What the placeholder needs | Target filename | Spec |
-|---|---|---|---|---|
-| P1 | "A real floor" feature | The floor mid-session: bags swinging, mitts cracking, room moving as one | `trial-floor.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
+| Priority | Section | What the slot needs | Current stand-in | Target filename | Spec |
+|---|---|---|---|---|---|
+| P1 | "A real floor" feature | The floor mid-session: bags swinging, mitts cracking, room moving as one | `trial-floor.mp4` (raw "Cinematic 2" footage, live pad work) | `trial-floor.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
 
 ## Contact (`/contact/`)
-| Priority | Section | What the placeholder needs | Target filename | Spec |
-|---|---|---|---|---|
-| P1 | Hero (right) | Gym exterior / entrance on Ashoka Street (or a clean floor shot) | `gym-exterior.webp` | Portrait 4:5, well-lit. Helps people find the door |
+| Priority | Section | What the slot needs | Current stand-in | Target filename | Spec |
+|---|---|---|---|---|---|
+| P1 | Hero (right) | Gym exterior / entrance on Ashoka Street (or a clean floor shot) | `bag-power.mp4` (homepage reel, reused — floor shot, not the exterior) | `gym-exterior.webp` | Portrait 4:5, well-lit. Helps people find the door |
 
 ## Weightlifting (`/weightlifting/`)
-| Priority | Section | What the placeholder needs | Target filename | Spec |
-|---|---|---|---|---|
-| P0 | Hero (right) | Wolfpack lifter mid-snatch or clean & jerk on the platform | `wolfpack-hero.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
-| ~~P0~~ | ~~Coach section~~ | ~~Portrait of **Coach Vignesh** at the barbell~~ | `coach-vignesh.webp` | Done |
+| Priority | Section | What the slot needs | Current stand-in | Target filename | Spec |
+|---|---|---|---|---|---|
+| P0 | Hero (right) | Wolfpack lifter mid-snatch or clean & jerk on the platform | `wolfpack-hero.mp4` (real Wolfpack footage — Achyuth's 85kg snatch, from `D:\Wolfpack Weightlifting\dist\reels\`) | `wolfpack-hero.mp4` + `.webp` | Vertical 9:16, 6–8s, muted |
+| ~~P0~~ | ~~Coach section~~ | ~~Portrait of **Coach Vignesh** at the barbell~~ | done | `coach-vignesh.webp` | Done |
 
 ---
 
 ## Raw footage already on hand (not yet web-ready)
-These sit in the local `assets/` folder (not served). If you're happy for them to go live,
-I can compress + export them into the slots above:
+These sit in the local `assets/` folder (not served). Already used as a stand-in above:
+`Training 3.mp4` → `beginners-hero.mp4`, `Cinematic 2.mp4` → `trial-floor.mp4`
+(7s clip, compressed, muted, in `public/assets/`). Still spare, not yet used anywhere:
 
-- `Cinematic 1.mp4`, `Cinematic 2.mp4` — candidate hero loops
-- `Training 1–4.mp4` — candidate for the beginners session band / feature clips
+- `Cinematic 1.mp4` — solo skipping-rope clip, near-duplicate of the `skip.mp4` reel already live
+- `Training 1.mp4` — turns out to be the same bag-work session/room as the `bag-power.mp4`
+  reel already live, not distinct footage
+- `Training 2.mp4` — trophy/medal close-up montage, not session footage (misleading filename)
+- `Training 4.mp4` — group cone-drill workout, near-duplicate of the `group-class.mp4` reel already live
 - `ONLY TESTIMONIAL.mp4` — candidate for a real video testimonial
 - `Client pic 1.jpg`, `Client pic 2.avif`, `Client pic 3.jpg`, `IMG-20260824-WA0004.jpg` —
   candidate member portraits (need name + consent to attach as a named testimonial)
